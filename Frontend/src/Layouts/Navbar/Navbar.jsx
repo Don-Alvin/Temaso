@@ -1,10 +1,11 @@
 import React from 'react'
+import { FiArrowRight } from 'react-icons/fi'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
 
 const Navbar = () => {
   return (
-    <div className="p-5 bg-white">
+    <div className="p-5 bg-white fixed top-0 left-0 right-0 z-10">
       <nav className="flex justify-between items-center">
         <div className="logo">
           <img src="../../public/images/logo-no-background.svg" alt="logo" className='logo'/>
@@ -26,8 +27,9 @@ const Navbar = () => {
           <div className="btn bg-white flex justify-center items-center rounded w-20 h-8 border-teal-900 border">
             <Link className='text-slate-700'>Log in</Link>
           </div>
-          <div className="btn bg-teal-900 flex justify-center items-center rounded w-20 h-8">
-            <Link className='text-white'>Sign up</Link>
+          <div className="btn bg-teal-900 flex justify-center gap-2 items-center rounded w-40 h-8">
+            <Link className='text-white'>Get Started</Link>
+            <FiArrowRight className='text-white'/>
           </div>
         </div>
       </nav>
