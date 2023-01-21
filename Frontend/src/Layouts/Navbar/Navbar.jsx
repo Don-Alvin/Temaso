@@ -23,7 +23,7 @@ const Navbar = () => {
           </ul>
         </div>
         <div className="flex justify-around gap-8">
-          <div className="btn bg-white flex justify-center items-center rounded w-20 h-8 border-teal-900 border-2">
+          <div className="btn bg-white flex justify-center items-center rounded w-20 h-8 border-teal-900 border">
             <Link className='text-slate-700'>Log in</Link>
           </div>
           <div className="btn bg-teal-900 flex justify-center items-center rounded w-20 h-8">
