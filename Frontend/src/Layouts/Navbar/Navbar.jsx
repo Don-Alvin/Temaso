@@ -5,7 +5,7 @@ import './Navbar.css'
 
 const Navbar = () => {
   return (
-    <div className="p-5 bg-white fixed top-0 left-0 right-0 z-10">
+    <div className="px-20 py-5 bg-white fixed top-0 left-0 right-0 z-10">
       <nav className="flex justify-between items-center">
         <div className="logo">
           <img src="../../public/images/logo-no-background.svg" alt="logo" className='logo'/>
