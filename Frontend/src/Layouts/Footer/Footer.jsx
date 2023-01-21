@@ -7,9 +7,9 @@ const Footer = () => {
       <div className="flex justify-evenly mb-8">
         <div className="flex flex-col gap-10">
           <img src="../../public/images/logo-no-background.svg" alt="logo" className='w-24'/>
-          <p className="text-slate-900">Stay organized and productive with Proma.io</p>
+          <p className="text-slate-700">Stay organized and productive with Proma.io</p>
           <form className='flex flex-col gap-8'>
-            <label htmlFor="email">Subscribe to our newsletter</label>
+            <label htmlFor="email" className='text-slate-700'>Subscribe to our newsletter</label>
             <input type="email" name="email" id="email" placeholder='Enter your email'/>
             <button type="submit" className='flex justify-center items-center gap-2 w-40 h-10 rounded bg-teal-900'>
               <span className='text-white'>Subscribe</span>
