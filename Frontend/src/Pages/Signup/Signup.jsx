@@ -6,7 +6,7 @@ const Signup = () => {
   return (
     <div className='flex items-center justify-around mx-10 mt-20'>
         <img src="../../public/images/logo-no-background.svg" alt="logo"  className='w-80'/>
-        <div className="flex flex-col gap- items-center gap-8 border rounded-lg p-10 shadow-md">
+        <div className="flex flex-col gap- items-center gap-8 border border-teal-900 rounded-lg p-10 shadow-md">
             <h2 className="text-teal-900 text-xl font-bold">Create Account</h2>
             <Link  className='bg-white  border rounded shadow flex items-center gap-4 p-2 px-6'>
                 <FcGoogle />
