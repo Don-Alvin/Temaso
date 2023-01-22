@@ -25,10 +25,10 @@ const Navbar = () => {
         </div>
         <div className="flex justify-around gap-8">
           <div className="btn bg-white flex justify-center items-center rounded w-20 h-8 border-teal-900 border">
-            <Link className='text-slate-700'>Log in</Link>
+            <Link to='/login' className='text-slate-700'>Log in</Link>
           </div>
           <div className="btn bg-teal-900 flex justify-center gap-2 items-center rounded w-40 h-8">
-            <Link className='text-white'>Get Started</Link>
+            <Link to='/signup' className='text-white'>Get Started</Link>
             <FiArrowRight className='text-white'/>
           </div>
         </div>
