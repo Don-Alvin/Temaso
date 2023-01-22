@@ -59,7 +59,7 @@ const Footer = () => {
           <Link className='bg-rose-500 text-white rounded-sm p-1'>
             <FiInstagram />
           </Link>
-          <span className="text-slate-700">	&copy;{date} Proma</span>
+          <span className="text-slate-700">	&copy;{date} Proma. All rights reserved</span>
         </div>
       </div>
   )

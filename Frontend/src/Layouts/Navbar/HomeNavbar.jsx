@@ -1,9 +1,8 @@
 import React from 'react'
-import { FiArrowRight } from 'react-icons/fi'
+import { MdOutlineNotificationsNone } from 'react-icons/md'
 import { Link } from 'react-router-dom'
-import './Navbar.css'
 
-const Navbar = () => {
+const HomeNavbar = () => {
   return (
     <div className="px-20 py-5 bg-white fixed top-0 left-0 right-0 z-10 border-b border-teal-900">
       <nav className="flex justify-between items-center">
@@ -12,6 +11,9 @@ const Navbar = () => {
         </div>
         <div>
           <ul className="flex justify-around items-center gap-8">
+          <li className="text-slate-700">
+              <Link>Dashboard</Link>
+            </li>
             <li className="text-slate-700">
               <Link className=''>About</Link>
             </li>
@@ -20,18 +22,13 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="flex justify-around gap-8">
-          <div className="btn bg-white flex justify-center items-center rounded w-20 h-8 border-teal-900 border">
-            <Link to='/login' className='text-slate-700'>Log in</Link>
-          </div>
-          <div className="btn bg-teal-900 flex justify-center gap-2 items-center rounded w-40 h-8">
-            <Link to='/signup' className='text-white'>Get Started</Link>
-            <FiArrowRight className='text-white'/>
-          </div>
+        <div className="flex gap-8 items-center justify-center">
+          <MdOutlineNotificationsNone className='text-teal-900 text-4xl'/>
+          <img src="public/images/profile.jpg" alt="" className="w-10 h-10 rounded-full"/>
         </div>
       </nav>
     </div>
   )
 }
 
-export default Navbar
+export default HomeNavbar
