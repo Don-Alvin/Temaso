@@ -8,7 +8,7 @@ const Signup = () => {
   return (
     <>
         <Navbar />
-        <div className='flex items-center justify-around m-10'>
+        <div className='flex items-center justify-around m-10 mt-28'>
             <img src="../../public/images/logo-no-background.svg" alt="logo"  className='w-80'/>
             <div className="flex flex-col gap- items-center gap-8 border border-teal-900 rounded-lg p-10 shadow-md">
                 <h2 className="text-teal-900 text-xl font-bold">Create Account</h2>

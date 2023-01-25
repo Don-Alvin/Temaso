@@ -13,7 +13,7 @@ const Menu = () => {
     <div className='flex flex-col justify-between px-10 gap-8 pt-24 pb-20 h-screen border-r border-zinc-50'>
         <div className='flex flex-col gap-8'>
             <img src="public/images/logo-white.png" alt="logo" className='w-12' />
-            <Link className='bg-zinc-50 flex items-center justify-center gap-3 p-2 rounded-md w-40'>
+            <Link to='/addproject' className='bg-zinc-50 flex items-center justify-center gap-3 p-2 rounded-md w-40'>
                 <span className="text-slate-900">Add Project</span>
                 <AiOutlinePlus className='text-teal-900 font-extrabold text-xl'/>
             </Link>

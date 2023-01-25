@@ -1,16 +1,13 @@
 import React from 'react'
 import HomeNavbar from '../../Layouts/Navbar/HomeNavbar'
-import Menu from '../../components/Menu/Menu'
 import DashboardItems from '../../components/DashboardItems/DashboardItems'
+import { Route, Routes } from 'react-router-dom'
 
 const Dashboard = () => {
   return (
     <>
         <HomeNavbar />
-        <div className='mt-22 flex bg-teal-900'>
-          <Menu />
-          <DashboardItems />
-        </div>
+        <DashboardItems />
     </>
   )
 }
