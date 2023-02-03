@@ -1,28 +1,34 @@
 import React from 'react'
 import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} from 'react-router-dom'
 
+
 // Layouts
-import RootLayout from './Layouts/RootLayout'
+import DashboardLayout from './Layouts/DashboardLayout'
 
 // Pages
 import LandingPage from './pages/LandingPage'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Profile from './pages/Dashboard/Profile'
+import Dashboard from './pages/Dashboard/Dashboard'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/' element={<RootLayout />}>
-      <Route index element={<LandingPage />} />
+    <Route path='/' element={<LandingPage />}>
       <Route path='login' element={<Login />} />
-      <Route path='signup' element={<Signup />} />
+      <Route path='dasboard' element={<DashboardLayout />}>
+        <Route index element={<Dashboard />} />
+        <Route path='profile' element={<Profile />} />
+      </Route>
     </Route>
   )
 )
 
 const App = () => {
-
   return (
-    <RouterProvider router={router} />
+    <div>
+      <RouterProvider router={router} />
+    </div>
   )
 }
 

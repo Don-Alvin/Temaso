@@ -1,8 +1,13 @@
+import { Avatar, Box, Flex } from '@chakra-ui/react'
 import React from 'react'
 
 const Navbar = () => {
   return (
-    <div>Navbar</div>
+    <Box as='header'>
+        <Flex>
+           <Avatar src='/images/icon.svg'/>
+        </Flex>
+    </Box>
   )
 }
 
