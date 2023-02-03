@@ -35,7 +35,7 @@ const Login = () => {
           
           <CardFooter>
               <Text color='gray.500'>Don't have an account?
-                <Text as='span' color='brand.900'>
+                <Text w='100%' as='span' color='brand.900'>
                   <Link to='/signup'> Sign up</Link>
                 </Text>
               </Text>

@@ -11,6 +11,8 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Dashboard/Profile'
 import Dashboard from './pages/Dashboard/Dashboard'
+import CreateTask from './components/CreateTask'
+import Team from './components/Team'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -21,6 +23,8 @@ const router = createBrowserRouter(
       <Route path='dashboard' element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
         <Route path='profile' element={<Profile />} />
+        <Route path='create' element={<CreateTask />} />
+        <Route path='team' element={<Team />} />
       </Route>
     </>  
   )
