@@ -28,7 +28,7 @@ const Login = () => {
                 <Input type='password' name='password' />
               </FormControl>
               <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' colorScheme='brand.700'>
-                <Link to='dashboard'>Log in</Link>
+                <Link to='/dashboard'>Log in</Link>
               </Button>
             </Form>
           </CardBody>

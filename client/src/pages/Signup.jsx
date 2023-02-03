@@ -40,7 +40,7 @@ const Signup = () => {
                 </FormControl>
               </Box>
               <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' colorScheme='brand.700'>
-                <Link to='dashboard'>Sign up</Link>
+                <Link to='/dashboard'>Sign up</Link>
               </Button>
             </Form>
           </CardBody>
