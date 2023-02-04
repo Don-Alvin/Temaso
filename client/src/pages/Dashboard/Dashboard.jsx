@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Card, CardBody, CardFooter, CardHeader, Divider, Flex, Heading, HStack, SimpleGrid, Tab, TabList, TabPanel, TabPanels, Tabs, Text } from '@chakra-ui/react'
 import React from 'react'
-import tasks from '../../data/data'
+import tasks from '../../data/tasks'
 import { ViewIcon, EditIcon } from '@chakra-ui/icons'
 
 const Dashboard = () => {
@@ -14,7 +14,7 @@ const Dashboard = () => {
       </TabList>
       <TabPanels>
         <TabPanel>
-        <SimpleGrid spacing={8} minChildWidth={300}>
+        <SimpleGrid spacing={4} minChildWidth='300px'>
       {tasks && tasks.map(task => (
         <Card key={task.id} borderTop='8px' borderColor='brand.900' bg='white'>
           <CardHeader>

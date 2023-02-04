@@ -11,8 +11,10 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Profile from './pages/Dashboard/Profile'
 import Dashboard from './pages/Dashboard/Dashboard'
-import CreateTask from './components/CreateTask'
-import Team from './components/Team'
+import Team from './pages/Dashboard/Team'
+import CreateTask from './pages/Dashboard/CreateTask'
+import TeamLayout from './Layouts/TeamLayout'
+import AddTeamMember from './components/AddTeamMember'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -23,8 +25,11 @@ const router = createBrowserRouter(
       <Route path='dashboard' element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
         <Route path='profile' element={<Profile />} />
-        <Route path='create' element={<CreateTask />} />
-        <Route path='team' element={<Team />} />
+        <Route path='create' element={<CreateTask/>} />
+        <Route path='team' element={<TeamLayout />}>
+          <Route index element={<Team />} />
+          <Route path='addteammember' element={<AddTeamMember />} />
+        </Route>
       </Route>
     </>  
   )
