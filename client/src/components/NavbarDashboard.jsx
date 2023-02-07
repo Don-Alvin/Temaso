@@ -17,7 +17,7 @@ const NavbarDashboard = () => {
             </Avatar>
             <Text>Kevin Gates</Text>
             <Link to='/'>
-              <Button color='white' bgColor='brand.900'>Logout</Button>
+              <Button color='white' bgColor='brand.900' _hover={{bg:'teal.600'}}>Logout</Button>
             </Link>
         </HStack>
     </Flex>

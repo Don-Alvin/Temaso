@@ -9,9 +9,9 @@ const Signup = () => {
     <div>
       <Navbar />
       <Flex as='section' display='flex' justify='center' alignContent='center' position='relative' top='100px' left='0' right='0' gap={8}>
-        <Card>
+        <Card display='flex' flexDirection='column' alignItems='center'>
           <CardHeader>
-            <Button display='flex' gap={4} alignContent='center' colorScheme='red'>
+            <Button display='flex' gap={4} alignItems='center'  colorScheme='red'>
               <Icon as={FcGoogle} />
               <Text>Sign up with Google</Text>
             </Button>
@@ -39,7 +39,7 @@ const Signup = () => {
                   <Input type='password' name='confrimPassword' />
                 </FormControl>
               </Box>
-              <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' colorScheme='brand.700'>
+              <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' _hover={{bg:'teal.600'}}>
                 <Link to='/dashboard'>Sign up</Link>
               </Button>
             </Form>
