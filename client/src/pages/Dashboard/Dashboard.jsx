@@ -19,10 +19,9 @@ const Dashboard = () => {
         <Card key={task.id} borderTop='8px' borderColor='brand.900' bg='white'>
           <CardHeader>
             <Flex gap={5}>
-              <Avatar name={task.author} bg='brand.500' src={task.img} />
               <Box>
                 <Heading as='h3' size='sm'>{task.title}</Heading>
-                <Text>by {task.author}</Text>
+                <Text>assigned to {task.author}</Text>
               </Box>
             </Flex>
           </CardHeader>
@@ -32,10 +31,7 @@ const Dashboard = () => {
           </CardBody>
             <Divider borderColor='gray.200'/>
           <CardFooter>
-            <HStack>
-              <Button variant="ghost" leftIcon={<ViewIcon />}>Watch</Button>
-              <Button variant="ghost" leftIcon={<EditIcon />}>Comment</Button>
-            </HStack>
+            <Text>Deadline: 24th February, 2023</Text>
           </CardFooter>
         </Card>
       ))}
