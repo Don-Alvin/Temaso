@@ -1,10 +1,17 @@
 import { Box, Button, Card, CardHeader, Flex, Image, ListIcon, Text, Icon, CardBody, FormControl, FormLabel, Input, CardFooter } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { Form, Link } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 
 const Login = () => {
+
+  const [username, setUsername] = useState('')
+  const [useremail, setUsermail] = useState('')
+
+  
+
+
   return (
     <div>
       <Navbar />
@@ -18,14 +25,14 @@ const Login = () => {
           </CardHeader>
 
           <CardBody>
-            <Form>
+            <Form method='post'>
               <FormControl>
                 <FormLabel color='gray.500'>Enter your email</FormLabel>
-                <Input type='text' name='name' />
+                <Input type='text' name='name' onChange={value}/>
               </FormControl>
               <FormControl mt='10px'>
                 <FormLabel color='gray.500'>Enter your password</FormLabel>
-                <Input type='password' name='password' />
+                <Input type='password' name='password' onChange={value}/>
               </FormControl>
               <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' _hover={{bg:'teal.600'}}>
                 <Link to='/dashboard'>Log in</Link>
