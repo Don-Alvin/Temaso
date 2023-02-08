@@ -28,11 +28,11 @@ const Login = () => {
             <Form method='post'>
               <FormControl>
                 <FormLabel color='gray.500'>Enter your email</FormLabel>
-                <Input type='text' name='name' onChange={value}/>
+                <Input type='text' name='name'/>
               </FormControl>
               <FormControl mt='10px'>
                 <FormLabel color='gray.500'>Enter your password</FormLabel>
-                <Input type='password' name='password' onChange={value}/>
+                <Input type='password' name='password'/>
               </FormControl>
               <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' _hover={{bg:'teal.600'}}>
                 <Link to='/dashboard'>Log in</Link>
