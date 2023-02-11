@@ -39,8 +39,7 @@ const AddTeamMember = () => {
                   type='text' 
                   name='name' 
                   placeholder='Enter name' 
-                  outlineColor='brand.900' 
-                  border='none'
+                  _focus={{borderColor: 'brand.900', outline: 'none'}}
                   onChange={event => setName(event.target.value)}
                   value={name}
                 />
@@ -51,9 +50,6 @@ const AddTeamMember = () => {
                   type='text' 
                   name='position' 
                   placeholder='Enter position' 
-                  outlineColor='brand.900' 
-                  _active={{outline: 'none'}}
-                  border='none'
                   onChange={event => setPosition(event.target.value)}
                   value={position}
                 />

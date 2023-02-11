@@ -1,7 +1,6 @@
 const dotenv = require("dotenv").config({ path: "./.env" });
 const http = require("http");
 const mongoose = require("mongoose");
-const cors = require("cors");
 const app = require("./app");
 
 const server = http.createServer(app);

@@ -1,48 +1,57 @@
-const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const bcrypt = require("bcrypt");
 
-const registerUser = asyncHandler(async (req, res) => {
-	const { name, email, password, confirmPassword } = req.body;
+async function registerUser(req, res) {
+	try {
+		const { email, username, password } = req.body;
 
-	// Validation
+		// Check if user exists
+		const existEmail = new Promise((resolve, reject) => {
+			User.findOne({ email }, (err, email) => {
+				if (err) reject(new Error(err));
+				if (email)
+					reject({
+						error: "An existing account is registered under that email",
+					});
 
-	if (!name || !email || !password) {
-		res.status(400);
-		throw new Error("Please fill in all required fields");
+				resolve();
+			});
+		});
+
+		Promise.all([existEmail])
+			.then(() => {
+				if (password) {
+					bcrypt
+						.hash(password, 10)
+						.then((hashedPassword) => {
+							const user = new User({
+								email,
+								username,
+								password: hashedPassword,
+							});
+
+							user
+								.save()
+								.then((result) =>
+									res
+										.status(201)
+										.send({ message: "User registered successfully!" })
+								)
+								.catch((error) => res.status(500).send({ error }));
+						})
+						.catch((error) => {
+							return res.status(500).send({
+								error: "Unable to hash password",
+							});
+						});
+				}
+			})
+			.catch((error) => {
+				return res.status(500).send({ error });
+			});
+	} catch (error) {
+		return res.status(500).send(error);
 	}
-
-	if (password.length < 6) {
-		res.status(400);
-		throw new Error("Password must be up to 6 characters");
-	}
-
-	if (confirmPassword === password) {
-		res.status(400);
-		throw new Error("Passwords must match");
-	}
-
-	const userExists = await User.findOne({ email });
-
-	if (userExists) {
-		res.status(400);
-		throw new Error("Email has already been registered");
-	}
-
-	// Create user
-
-	const user = await User.create({
-		name,
-		email,
-		password,
-	});
-
-	if (user) {
-		const { _id, name, email } = user;
-		res.status(201).json({ _id, name, email });
-	} else {
-		res.status(400);
-		throw new Error("Invalid user data");
-	}
-});
+}
 
 module.exports = { registerUser };
