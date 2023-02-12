@@ -13,5 +13,6 @@ app.use(morgan("tiny"));
 app.disable("x-powered-by");
 
 app.use("/signup", UserRouter);
+app.user("/login", UserRouter);
 
 module.exports = app;
