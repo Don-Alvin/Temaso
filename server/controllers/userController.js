@@ -2,6 +2,7 @@ const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config({ path: "./.env" });
+const otpGenerator = require("otp-generator");
 
 // middleware to verify user
 
@@ -114,4 +115,31 @@ async function loginUser(req, res) {
 	}
 }
 
-module.exports = { registerUser, loginUser, verifyUser };
+async function generateOTP(req, res) {
+	req.app.locals.OTP = otpGenerator.generate(6, {
+		lowerCaseAlphabets: false,
+		upperCaseAlphabets: false,
+		specialChars: false,
+	});
+
+	return res.status(201).send({ code: req.app.locals.OTP });
+}
+
+async function verifyOTP(req, res) {
+	const { code } = req.query;
+	if (parseInt(req.app.locals.OTP) === parseInt(code)) {
+		req.app.locals.OTP = null;
+		req.app.locals.resetSession = true;
+		return res.status(201).send({ msg: "Verified Successfully" });
+	}
+
+	return res.status(400).send({ error: "Invalid OTP" });
+}
+
+module.exports = {
+	registerUser,
+	loginUser,
+	verifyUser,
+	generateOTP,
+	verifyOTP,
+};

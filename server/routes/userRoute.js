@@ -3,7 +3,10 @@ const {
 	loginUser,
 	registerUser,
 	verifyUser,
+	verifyOTP,
+	generateOTP,
 } = require("../controllers/userController");
+const { localVariable } = require("../middleware/auth");
 
 const UserRouter = Router();
 
@@ -18,9 +21,11 @@ UserRouter.route("/login").post(verifyUser, loginUser);
 // 	res.status(201).send("register mail route");
 // });
 
-// Authenticate user
-// UserRouter.post("/", (req, res) => {
-// 	res.status(201).send("authenticate user route");
-// });
+// Generate OTP
+
+UserRouter.route("/generateotp").get(verifyUser, localVariable, generateOTP);
+
+// Verify OTP
+UserRouter.route("/verifyotp").get(verifyOTP);
 
 module.exports = UserRouter;
