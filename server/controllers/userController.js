@@ -3,6 +3,22 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config({ path: "./.env" });
 
+// middleware to verify user
+
+async function verifyUser(req, res, next) {
+	try {
+		const { email } = req.method === "GET" ? req.query : req.body;
+
+		// check the user existence
+
+		let exist = await User.findOne({ email });
+		if (!exist) return res.status(404).send({ error: "Email not registred" });
+		next();
+	} catch (error) {
+		return res.status(404).send({ error: "Authentication failed" });
+	}
+}
+
 // Register user
 async function registerUser(req, res) {
 	try {
@@ -98,4 +114,4 @@ async function loginUser(req, res) {
 	}
 }
 
-module.exports = { registerUser, loginUser };
+module.exports = { registerUser, loginUser, verifyUser };
