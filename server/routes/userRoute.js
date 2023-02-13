@@ -1,24 +1,22 @@
 const { Router } = require("express");
-const { registerUser } = require("../controllers/userController");
+const { loginUser, registerUser } = require("../controllers/userController");
 
 const UserRouter = Router();
 
 // Register new User
-UserRouter.post("/", registerUser);
-
-// Register Mail
-UserRouter.post("/", (req, res) => {
-	res.status(201).send("register mail route");
-});
-
-// Authenticate user
-UserRouter.post("/", (req, res) => {
-	res.status(201).send("authenticate user route");
-});
+UserRouter.route("/register").post(registerUser);
 
 // Login User
-UserRouter.post("/", (req, res) => {
-	res.status(201).send("login user route");
-});
+UserRouter.route("/login").post(loginUser);
+
+// Register Mail
+// UserRouter.post("/", (req, res) => {
+// 	res.status(201).send("register mail route");
+// });
+
+// Authenticate user
+// UserRouter.post("/", (req, res) => {
+// 	res.status(201).send("authenticate user route");
+// });
 
 module.exports = UserRouter;

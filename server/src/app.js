@@ -12,7 +12,7 @@ app.use(cors());
 app.use(morgan("tiny"));
 app.disable("x-powered-by");
 
-app.use("/signup", UserRouter);
-app.user("/login", UserRouter);
+app.use("/", UserRouter);
+app.use("/", UserRouter);
 
 module.exports = app;
