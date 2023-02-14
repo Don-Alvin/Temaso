@@ -12,7 +12,7 @@ const Navbar = () => {
                 <NavLink to='/login'>Log in</NavLink>
               </Box>
               <Box bg='brand.900' px='10px' py='6px' color='white' borderRadius='5px' _hover={{bg:'teal.600'}}>
-                <NavLink to='/signup'>Get Started</NavLink>
+                <NavLink to='/register'>Get Started</NavLink>
               </Box>
            </Box>
         </Flex>

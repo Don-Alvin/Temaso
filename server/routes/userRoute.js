@@ -19,7 +19,7 @@ UserRouter.route("/register").post(registerUser);
 UserRouter.route("/login").post(verifyUser, loginUser);
 
 // Register Mail
-UserRouter.post("/", registerMail);
+// UserRouter.post("/", registerMail);
 
 // Generate OTP
 UserRouter.route("/generateotp").get(verifyUser, localVariable, generateOTP);

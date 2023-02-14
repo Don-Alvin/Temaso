@@ -3,6 +3,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 const NavbarDashboard = () => {
+
   return (
     <Flex as='nav' py='30px' alignItems='center' justify='space-between' mb='40px' w='100%' px='40px' borderBottom='2px' borderColor='brand.900'>
         <Heading as='h1' display='flex' alignItems='center' gap={4} color='brand.900'>

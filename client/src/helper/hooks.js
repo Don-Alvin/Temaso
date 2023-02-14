@@ -1,5 +1,5 @@
 import axios from "axios";
-axios.defaults.baseURL = process.env.REACT_APP_DOMAIN_SERVER;
+axios.defaults.baseURL = import.meta.env.VITE_APP_DOMAIN_SERVER;
 
 // register user
 export async function registerUser(credentials) {
@@ -11,13 +11,13 @@ export async function registerUser(credentials) {
 
 		let { email } = credentials;
 
-		if (status === 201) {
-			await axios.post("api/registerMail", {
-				username,
-				userEmail: email,
-				text: message,
-			});
-		}
+		// if (status === 201) {
+		// 	await axios.post("api/registerMail", {
+		// 		username,
+		// 		userEmail: email,
+		// 		text: message,
+		// 	});
+		// }
 
 		return Promise.resolve(message);
 	} catch (error) {

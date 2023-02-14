@@ -4,9 +4,10 @@ import { FcGoogle } from 'react-icons/fc'
 import { Form, Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useFormik } from 'formik'
-import { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import { registerValidation } from '../helper/validate'
 import { useAuthStore } from '../store/store.js'
+import { registerUser } from '../helper/hooks'
 
 const Signup = () => {
   const navigate = useNavigate()
@@ -23,8 +24,15 @@ const Signup = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      values = await Object.assign(values)
       setUsername(values.username)
-      navigate('/login')
+      let registerPromise = registerUser(values)
+      toast.promise(registerPromise, {
+        loading: 'Creating...',
+        success: <b>Registration successfull</b>,
+        error: <b>Could not register</b>
+      })
+      registerPromise.then(function(){navigate('/login')})
     }
   })
 
@@ -42,7 +50,7 @@ const Signup = () => {
           </CardHeader>
 
           <CardBody>
-            <Form method='post' action='http://localhost:5000/api/signup' onSubmit={formik.handleSubmit}>
+            <Form onSubmit={formik.handleSubmit}>
               <Box display={{lg: 'flex'}} alignItems='center' gap={4} mb='20px'>
                 <FormControl>
                   <FormLabel color='gray.500'>Enter your email</FormLabel>

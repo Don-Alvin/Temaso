@@ -1,13 +1,16 @@
 import { Box, Button, Card, CardHeader, Flex, Image, ListIcon, Text, Icon, CardBody, FormControl, FormLabel, Input, CardFooter } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
-import  {Toaster} from 'react-hot-toast'
+import toast, {Toaster} from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { loginValidation } from '../helper/validate'
+import { loginUser } from '../helper/hooks'
 
 const Login = () => {
+
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues:{
       email: '',
@@ -17,8 +20,13 @@ const Login = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
-      values.password = ''
-      console.log(values);
+      let loginPromise = loginUser({email, password})
+      toast.promise(loginPromise, {
+        loading: 'Login in...',
+        success: <b>Login successfull</b>,
+        error: <b>Could not login user</b>
+      })
+      loginPromise.then(function(){navigate('/dashboard')})
     }
   })
 
@@ -46,7 +54,7 @@ const Login = () => {
                 <Input type='password' name='password' {...formik.getFieldProps('password')} />
               </FormControl>
               <Button type='submit' mt='20px' w='100%' bg='brand.900' color='white' _hover={{bg:'teal.600'}}>
-                <Link to='/dashboard'>Log in</Link>
+                Log in
               </Button>
             </Form>
           </CardBody>
@@ -54,7 +62,7 @@ const Login = () => {
           <CardFooter>
               <Text color='gray.500'>Don't have an account?
                 <Text w='100%' as='span' color='brand.900'>
-                  <Link to='/signup'> Sign up</Link>
+                  <Link to='/register'> Sign up</Link>
                 </Text>
               </Text>
           </CardFooter>
