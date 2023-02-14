@@ -1,13 +1,17 @@
 import { Box, Button, Card, CardBody, CardFooter, CardHeader, Flex, FormControl, FormLabel, Image, Input, Text, Icon } from '@chakra-ui/react'
-import React, { useState } from 'react'
+import React from 'react'
 import { FcGoogle } from 'react-icons/fc'
-import { Form, Link } from 'react-router-dom'
+import { Form, Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar'
 import { useFormik } from 'formik'
 import { Toaster } from 'react-hot-toast'
 import { registerValidation } from '../helper/validate'
+import { useAuthStore } from '../store/store.js'
 
 const Signup = () => {
+  const navigate = useNavigate()
+  const setUsername = useAuthStore((state) => state.setUsername)
+
   const formik = useFormik({
     initialValues :{
       email: '',
@@ -19,7 +23,8 @@ const Signup = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
-      console.log(values);
+      setUsername(values.username)
+      navigate('/login')
     }
   })
 
@@ -63,14 +68,6 @@ const Signup = () => {
                     type='password' 
                     name='password'
                     {...formik.getFieldProps('password')}  
-                    />
-                </FormControl>
-                <FormControl>
-                  <FormLabel color='gray.500'>Confirm Password</FormLabel>
-                  <Input 
-                    type='password' 
-                    name='confrimPassword'
-                    {...formik.getFieldProps('confirm_password')}  
                     />
                 </FormControl>
               </Box>

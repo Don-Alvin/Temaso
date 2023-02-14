@@ -12,7 +12,6 @@ export async function registerValidation(values) {
 	const errors = usernameVerify({}, values);
 	emailVerify(errors, values);
 	passwordVerify(errors, values);
-	confirmPasswordVerify(errors, values);
 	return errors;
 }
 
@@ -39,12 +38,6 @@ function passwordVerify(error = {}, values) {
 		error.password = toast.error("Password required");
 	} else if (values.password.includes(" ")) {
 		error.password = toast.error("Wrong password");
-	} else if (
-		!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[a-zA-Z\d!@#$%^&*]{8,}$/.test(
-			values.password
-		)
-	) {
-		error.password = toast.error("Invalid password");
 	}
 
 	return error;
@@ -59,11 +52,3 @@ function usernameVerify(error = {}, values) {
 }
 
 // Validate confirm password
-
-function confirmPasswordVerify(error = {}, values) {
-	if (values.confirm_password !== values.password) {
-		error.confirm_password = toast.error("Your passwords do not match");
-	}
-
-	return error;
-}

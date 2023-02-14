@@ -17,6 +17,7 @@ const Login = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      values.password = ''
       console.log(values);
     }
   })
