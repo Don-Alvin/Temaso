@@ -11,6 +11,7 @@ import { loginUser } from '../helper/hooks'
 const Login = () => {
 
   const navigate = useNavigate()
+
   const formik = useFormik({
     initialValues:{
       email: '',
@@ -20,6 +21,7 @@ const Login = () => {
     validateOnBlur: false,
     validateOnChange: false,
     onSubmit: async values => {
+      const { email, password} = values
       let loginPromise = loginUser({email, password})
       toast.promise(loginPromise, {
         loading: 'Login in...',
