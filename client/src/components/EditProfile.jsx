@@ -17,7 +17,7 @@ const EditProfile = () => {
         <Form method='post'>
             <FormControl mb='30px'>
                 <FormLabel color='gray.500'>Edit Profile Picture</FormLabel>
-                <Input type='file' name='profileImage' />
+                <Input type='file' name='profileImage' accept='.png, .jpeg, .jpg' />
             </FormControl>
             <FormControl mb='30px'>
                 <FormLabel color='gray.500'>Edit Name</FormLabel>
