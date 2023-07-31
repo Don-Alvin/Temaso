@@ -8,12 +8,12 @@ const MenuModal = ({handleAuthMenu, handleLogout}) => {
   return createPortal (
     <div>
         <div 
-            className=' bg-black opacity-80 blur-2xl fixed inset-0'
+            className=' bg-black opacity-80 blur-2xl fixed inset-0 z-40'
             onClick={handleAuthMenu}
         >
         </div>
         <div 
-            className='hidden md:block w-[200px]  bg-white border rounded-lg border-gray-300 shadow-lg fixed top-24 right-10'
+            className='hidden md:block w-[200px]  bg-white border rounded-lg border-gray-300 shadow-lg fixed top-24 right-10 z-50'
             >
             {user ? (
                 <ul className='flex flex-col w-full my-6 px-4'>
