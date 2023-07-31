@@ -8,6 +8,8 @@ import AccountPage from "./Pages/AccountPage"
 import { AuthContextProvider } from "./Features/Auth/AuthContext"
 import ErrorPage from "./Pages/ErrorPage"
 import { HelmetProvider } from "react-helmet-async"
+import Login from "./Features/Auth/Login"
+import Register from "./Features/Auth/Register"
 
 
 const router = createBrowserRouter(
@@ -16,6 +18,8 @@ const router = createBrowserRouter(
       <Route path="/" element={<Layout />}>
         <Route index element={<LandingPage />} />
         <Route path="account" element={<AccountPage />}></Route>
+        <Route path='login' element={<Login />} />
+        <Route path="register" element={<Register />} />
         <Route path="*" element={<ErrorPage />}/>
       </Route>
     </Route>
