@@ -44,7 +44,7 @@ const Header = () => {
       };
 
   return (
-    <header className='p-4 px-4 md:px-8 lg:px-16 flex sticky top-0 left-0 w-full z-10 border-b shadow bg-white opacity-90'>
+    <header className='p-4 px-4 md:px-8 lg:px-16 flex sticky top-0 left-0 w-full z-50 border-b shadow bg-white opacity-90'>
         <nav className='flex items-center justify-between w-full'>
             {/* Navbar menu Icon */}
             <AiOutlineMenu
