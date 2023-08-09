@@ -1,9 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import { useState } from "react"
 import MetaData from "../../Components/Meta/MetaData"
-import { auth } from "../../apis/firebase"
+import { auth, googleProvider } from "../../apis/firebase"
 import useAuth from "../../hooks/useAuth"
 import { toast } from "react-toastify"
 
@@ -24,9 +24,23 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      
+      await signInWithEmailAndPassword(auth, email, password)
+      toast.success("Login successfull")
+      navigate('/dashboard')
     } catch (error) {
-      
+      const errorMessage = error.message
+      toast.error(errorMessage)
+    }
+  }
+
+
+  const signInWithGoogle = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider)
+      navigate('/dashboard')
+    } catch (error) {
+      const errorMessage = error.message
+      toast.error(errorMessage)
     }
   }
 
@@ -65,6 +79,7 @@ const Login = () => {
             <button type='submit' className='bg-teal-700 rounded-lg p-3 text-white font-semibold'>Log in</button>
           </div>
         </form>
+        <button className="bg-red-600 text-white p-3 rounded" onClick={signInWithGoogle}>Sign in with google</button>
         <div className='py-4'>
           <span className='text-gray-700'>Not registered? <Link to='/register' className='text-teal-700'>Register</Link></span>
         </div>
