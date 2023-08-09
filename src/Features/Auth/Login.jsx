@@ -1,14 +1,33 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import { useState } from "react"
 import MetaData from "../../Components/Meta/MetaData"
+import { auth } from "../../apis/firebase"
+import useAuth from "../../hooks/useAuth"
+import { toast } from "react-toastify"
 
 const Login = () => {
 
+  const [email, setEmail] = useState(null)
+  const [password, setPassword] = useState(null)
   const [passwordVisible, setPasswordVisible] = useState(false)
+
+  const {user, setUser} = useAuth()
+
+  const navigate = useNavigate()
 
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      
+    } catch (error) {
+      
+    }
   }
 
   return (
@@ -19,16 +38,16 @@ const Login = () => {
           <h4 className="text-3xl text-gray-700 text-center">Hello again!</h4>
           <span className='py-4 text-xl w-2/3 text-center text-gray-700'>Log in into your account</span>
         </div>
-        <form className='py-1'>
+        <form className='py-1' onSubmit={handleSubmit}>
           <div className='flex flex-col gap-4'>
               <div className='flex flex-col gap-2'>
                 <label className="sr-only text-gray-700 text-xl">Email</label>
                 <input
                   className='p-2 border rounded-lg outline-teal-700'
                   type="email"
+                  onChange={(e) => setEmail(e.target.value)}
                   required
                   placeholder='Enter your email'
-                  autoComplete="on"
                 />
               </div>
             <div className='flex flex-col gap-2 relative'>
@@ -36,6 +55,7 @@ const Login = () => {
               <input
                 className='p-2 border rounded-lg outline-teal-700'
                 type={!passwordVisible ? 'password' : 'text'}
+                onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder='Enter your password'
               />
