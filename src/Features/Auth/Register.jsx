@@ -1,11 +1,9 @@
 import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useState } from "react"
-import { toast } from "react-toastify"
-import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth"
 import MetaData from "../../Components/Meta/MetaData"
 import useAuth from "../../hooks/useAuth"
-import { auth, googleProvider } from "../../apis/firebase"
+import { registerUser } from "../../helper/users"
 
 
 const Register = () => {
@@ -15,8 +13,6 @@ const Register = () => {
   const [password, setPassword] = useState(null)
   const [passwordVisible, setPasswordVisible] = useState(false)
 
-  const navigate = useNavigate()
-
   const {user, setUser} = useAuth()
   
   const handlePassword = () => {
@@ -25,25 +21,19 @@ const Register = () => {
 
   const handleRegister = async(e) => {
     e.preventDefault()
-    try {
-      await createUserWithEmailAndPassword(auth, email, password, name)
-      toast.success('User registered successfully!')
-      navigate('/dashboard')
-    } catch (error) {
-      const errorMessage = error.message
-      toast.error(errorMessage)
-    }
+    registerUser(name, email, password)
   }
 
-  const signInWithGoogle = async () => {
-    try {
-      await signInWithPopup(auth, googleProvider)
-      navigate('/dashboard')
-    } catch (error) {
-      const errorMessage = error.message
-      toast.error(errorMessage)
-    }
-  }
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     await signInWithPopup(auth, googleProvider)
+  //     navigate('/dashboard')
+  //     toast.success("Registration successfull")
+  //   } catch (error) {
+  //     const errorMessage = error.message
+  //     toast.error(errorMessage)
+  //   }
+  // }
 
   return (
     <section className='w-full flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
@@ -53,7 +43,18 @@ const Register = () => {
           <h4 className="text-3xl text-gray-700 text-center">Explore more by joining us</h4>
         </div>
         <form className='py-2 w-[90%]' onSubmit={handleRegister}>
-          <div className='flex flex-col gap-4 items-center'>
+              <div className='flex flex-col gap-4 items-center'>
+                <div className='flex flex-col gap-2 w-[100%]'>
+                  <label className="text-gray-700 text-md">Name</label>
+                  <input
+                    className='p-2 border rounded-lg outline-teal-700 '
+                    type="text"
+                    required
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder='Enter your username'
+                    autoComplete="off"
+                  />
+                </div>
                 <div className='flex flex-col gap-2 w-[100%]'>
                   <label className="text-gray-700 text-md">Email</label>
                   <input
@@ -62,17 +63,6 @@ const Register = () => {
                     required
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder='Enter your email'
-                    autoComplete="off"
-                  />
-                </div>
-                <div className='flex flex-col gap-2  w-[100%]'>
-                  <label className="text-gray-700 text-md">Username</label>
-                  <input
-                    className='p-2 border rounded-lg outline-teal-700'
-                    type="text"
-                    required
-                    onChange={(e) => setName(e.target.value)}
-                    placeholder='Enter your username'
                     autoComplete="off"
                   />
                 </div>
@@ -92,7 +82,6 @@ const Register = () => {
               <button type="submit" className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
         </form>
-        <button className="bg-red-600 text-white p-3 rounded" onClick={signInWithGoogle}>Register with google</button>
         <div className='py-4'>
           <span className='text-gray-700'>Already registered? <Link to='/login' className='text-teal-700'>Log in</Link></span>
         </div>

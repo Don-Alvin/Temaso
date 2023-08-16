@@ -37,7 +37,6 @@ const Header = () => {
     }
 
     const handleLogout = () => {
-        localStorage.removeItem("refreshToken");
         setUser(null)
         handleAuthMenu()
         navigate('/')
