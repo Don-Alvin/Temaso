@@ -16,7 +16,7 @@ const ErrorPage = () => {
         <div className='text-white font-bold' >
             <button 
               className='bg-teal-700 p-2 rounded'
-              onClick={navigate(-1)}
+              onClick={() => navigate(-1)}
             >
                 Go back
             </button>

@@ -1,20 +1,21 @@
 import { Link, useNavigate } from 'react-router-dom'
-import { BiSearchAlt2 } from 'react-icons/bi'
 import { CgProfile } from 'react-icons/cg'
 import { AiOutlineMenu } from 'react-icons/ai'
 import { GiCancel } from 'react-icons/gi'
 import { useState } from 'react'
-import useAuth from '../../hooks/useAuth'
 import MenuModal from '../Modal/MenuModal'
+import { signOut } from 'firebase/auth'
+import { auth } from '../../apis/firebase'
+import useAuth from '../../hooks/useAuth'
 
 const Header = () => {
     const [isAuthMenuOpen, setIsAuthMenuOpen] = useState(false)
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
     const[isSearchOpen, setIsSearchOpen] = useState(false)
 
-    const {user, setUser} = useAuth()
     const navigate = useNavigate();
 
+    const {user } = useAuth()
 
     const handleAuthMenu = () => {
         setIsAuthMenuOpen(!isAuthMenuOpen)
@@ -37,8 +38,7 @@ const Header = () => {
     }
 
     const handleLogout = () => {
-        setUser(null)
-        handleAuthMenu()
+        signOut(auth)
         navigate('/')
       };
 
@@ -134,6 +134,9 @@ const Header = () => {
                     <CgProfile
                         className='text-xl md:text-3xl lg:text-4xl text-gray-700 cursor-pointer'
                     />
+
+                    {user && <p className='text-gray-700 font-semibold'>Hey, {user.displayName}</p>}
+
                 </div>
             </div>
 

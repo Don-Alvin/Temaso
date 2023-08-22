@@ -1,15 +1,19 @@
 import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useState } from "react"
+import { toast } from "react-toastify"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import MetaData from "../../Components/Meta/MetaData"
-import useAuth from "../../hooks/useAuth"
-import { logInUser } from "../../helper/users"
+import { auth } from "../../apis/firebase"
+
 
 const Login = () => {
 
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [passwordVisible, setPasswordVisible] = useState(false)
+
+  const navigate = useNavigate()
 
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
@@ -17,18 +21,14 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    logInUser(email, password)
+    try {
+      signInWithEmailAndPassword(auth, email, password);
+      toast.success("Login successful");
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(error);
+    }
   }
-
-  // const signInWithGoogle = async () => {
-  //   try {
-  //     await signInWithPopup(auth, googleProvider)
-  //     navigate('/dashboard')
-  //   } catch (error) {
-  //     const errorMessage = error.message
-  //     toast.error(errorMessage)
-  //   }
-  // }
 
   return (
     <section className='w-full h-screen  flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>

@@ -3,7 +3,6 @@
 body,
 * {
 	font-family: "Montserrat", sans-serif;
-	color: rgb(87, 87, 87);
 }
 
 @tailwind base;

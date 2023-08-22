@@ -1,39 +1,79 @@
 import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { RxAvatar } from "react-icons/rx"
 import { useState } from "react"
+import { toast } from "react-toastify"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { doc, setDoc } from "firebase/firestore"; 
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import MetaData from "../../Components/Meta/MetaData"
-import useAuth from "../../hooks/useAuth"
-import { registerUser } from "../../helper/users"
+import { auth, db, storage } from "../../apis/firebase"
+
+
 
 
 const Register = () => {
 
-  const [name, setName] = useState(null)
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
+  const [displayName, setDisplayName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
   const [passwordVisible, setPasswordVisible] = useState(false)
 
-  const {user, setUser} = useAuth()
-  
+  const navigate = useNavigate()
+
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
   }
 
   const handleRegister = async(e) => {
     e.preventDefault()
-    registerUser(name, email, password)
-  }
+    try {
+      const res = await createUserWithEmailAndPassword(auth, email, password);
+      console.log(res.user);
+      await updateProfile(res.user, {
+        displayName
+      })
+      await setDoc(doc(db, "users", res.user.uid), {
+        uid: res.user.uid,
+        displayName,
+        email,
+      });
+      toast.success('Registration successfull')
+      navigate('/dashboard')
 
-  // const signInWithGoogle = async () => {
-  //   try {
-  //     await signInWithPopup(auth, googleProvider)
-  //     navigate('/dashboard')
-  //     toast.success("Registration successfull")
-  //   } catch (error) {
-  //     const errorMessage = error.message
-  //     toast.error(errorMessage)
-  //   }
-  // }
+      // const storageRef = ref(storage, avatar);
+      // const uploadTask = uploadBytesResumable(storageRef, file);
+
+      // Register three observers:
+      // uploadTask.on('state_changed', 
+      // (snapshot) => {
+      //   // Observe state change events such as progress, pause, and resume
+      //   // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      //   switch (snapshot.state) {
+      //     case 'paused':
+      //       console.log('Upload is paused');
+      //       break;
+      //     case 'running':
+      //       console.log('Upload is running');
+      //       break;
+      //   }
+      // },
+      //   (error) => {
+      //     toast.error(error.message)
+      //   }, 
+      //   () => {
+      //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+      //       await updateProfile(res.user, {
+      //         displayName,
+      //         photoURL: downloadURL
+      //       })
+      //     });
+      //   }
+      // );
+    } catch (error) {
+      toast.error(error.message);
+    }
+  }
 
   return (
     <section className='w-full flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
@@ -50,7 +90,7 @@ const Register = () => {
                     className='p-2 border rounded-lg outline-teal-700 '
                     type="text"
                     required
-                    onChange={(e) => setName(e.target.value)}
+                    onChange={(e) => setDisplayName(e.target.value)}
                     placeholder='Enter your username'
                     autoComplete="off"
                   />
@@ -79,6 +119,23 @@ const Register = () => {
                     {passwordVisible && <AiOutlineEyeInvisible  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
                     {!passwordVisible && <AiOutlineEye  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
                   </div>
+                  {/* <div>
+                    <input
+                     type='file'
+                     onChange={(e) => setAvatar(e.target.value)}
+                     className="hidden"
+                     id="file"
+                    />
+                    <label 
+                      htmlFor="avatar"
+                      className="text-gray-700 flex items-center gap-2 cursor-pointer"
+                    >
+                      <RxAvatar
+                        className="text-3xl"
+                      />
+                      <p>Add a profile picture</p>
+                    </label>
+                  </div> */}
               <button type="submit" className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
         </form>
