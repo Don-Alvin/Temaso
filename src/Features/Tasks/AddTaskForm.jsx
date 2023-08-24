@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-toastify'
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 import { db } from '../../apis/firebase'
+import { useNavigate } from 'react-router-dom'
 
 const AddTaskForm = () => {
     const [name, setName] = useState("")
@@ -14,11 +15,10 @@ const AddTaskForm = () => {
     const [assignedUser, setAssignedUser] = useState("")
 
     const { user } = useAuth()
+    const navigate = useNavigate()
 
   const createTask = async (e) => {
     e.preventDefault()
-    console.log(user.uid);
-    console.log(name, description, deadline, assignedUser);
     try {
         await addDoc(collection(db, "projects", user.uid, "tasks"), {
         name,
@@ -29,13 +29,13 @@ const AddTaskForm = () => {
         isCompleted: false
       })
       toast.success("New task assigned")
-      // setName('')
-      // setDeadline("")
-      // setDescription("")
-      // setAssignedUser("")
+      navigate("/dashboard/project")
+      setName('')
+      setDeadline("")
+      setDescription("")
+      setAssignedUser("")
     } catch (error) {
       toast.error(error.message)
-      console.log(error.message);
     }
   }
 
