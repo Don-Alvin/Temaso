@@ -3,7 +3,6 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { RxAvatar } from "react-icons/rx"
 import { useState } from "react"
 import { toast } from "react-toastify"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"; 
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import MetaData from "../../Components/Meta/MetaData"
@@ -39,7 +38,7 @@ const Register = () => {
         email,
       });
       toast.success('Registration successfull')
-      navigate('/dashboard')
+      navigate('/')
 
       // const storageRef = ref(storage, avatar);
       // const uploadTask = uploadBytesResumable(storageRef, file);
