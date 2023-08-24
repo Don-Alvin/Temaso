@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
+import { doc, setDoc } from 'firebase/firestore'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 import { db } from '../../apis/firebase'
-import { toast } from 'react-toastify'
 
 const AddProjectForm = () => {
   const [name, setName] = useState("")
   const [duration, setDuration] = useState("")
   const [description, setDescription] = useState("")
 
-  const { user } = useAuth() 
+  const { user } = useAuth()
+  const navigate = useNavigate()
 
   const addNewProject = async (e) => {
     e.preventDefault()
@@ -28,6 +31,7 @@ const AddProjectForm = () => {
         inProgress: true,
         isCompleted: false
       })
+      navigate('/dashboard')
       toast.success("New project added")
       setName('')
       setDuration("")

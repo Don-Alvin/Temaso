@@ -2,6 +2,10 @@ import { useState } from 'react'
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
+import useAuth from '../../hooks/useAuth'
+import { toast } from 'react-toastify'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { db } from '../../apis/firebase'
 
 const AddTaskForm = () => {
     const [name, setName] = useState("")
@@ -9,8 +13,30 @@ const AddTaskForm = () => {
     const [description, setDescription] = useState("")
     const [assignedUser, setAssignedUser] = useState("")
 
-  const createTask = (e) => {
+    const { user } = useAuth()
+
+  const createTask = async (e) => {
     e.preventDefault()
+    console.log(user.uid);
+    console.log(name, description, deadline, assignedUser);
+    try {
+        await addDoc(collection(db, "projects", user.uid, "tasks"), {
+        name,
+        description,
+        deadline,
+        assignedUser,
+        inProgress: true,
+        isCompleted: false
+      })
+      toast.success("New task assigned")
+      // setName('')
+      // setDeadline("")
+      // setDescription("")
+      // setAssignedUser("")
+    } catch (error) {
+      toast.error(error.message)
+      console.log(error.message);
+    }
   }
 
   return (
