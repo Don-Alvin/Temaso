@@ -2,15 +2,40 @@ import React, { useState } from 'react'
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
+import useAuth from '../../hooks/useAuth'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { db } from '../../apis/firebase'
+import { toast } from 'react-toastify'
 
 const AddProjectForm = () => {
   const [name, setName] = useState("")
   const [duration, setDuration] = useState("")
   const [description, setDescription] = useState("")
 
-  const addNewProject = (e) => {
+  const { user } = useAuth() 
+
+  const addNewProject = async (e) => {
     e.preventDefault()
-    console.log(name, duration, description);
+    console.log(user.uid);
+    console.log(name, description, duration);
+    try {
+        await setDoc(doc(db, "projects", user.uid), {
+        uid: user.uid,
+        name,
+        description,
+        duration,
+        createdBy: user.displayName,
+        inProgress: true,
+        isCompleted: false
+      })
+      toast.success("New project added")
+      setName('')
+      setDuration("")
+      setDescription("")
+    } catch (error) {
+      toast.error(error.message)
+      console.log(error.message);
+    }
   }
 
   return (

@@ -24,7 +24,7 @@ const Login = () => {
     try {
       signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful");
-      navigate("/");
+      navigate("/dashboard");
     } catch (error) {
       toast.error(error);
     }

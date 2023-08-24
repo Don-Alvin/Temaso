@@ -7,6 +7,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
 import MetaData from "../../Components/Meta/MetaData"
 import { auth, db, storage } from "../../apis/firebase"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 
 
 
@@ -36,9 +37,10 @@ const Register = () => {
         uid: res.user.uid,
         displayName,
         email,
+        online: true
       });
       toast.success('Registration successfull')
-      navigate('/')
+      navigate('/dashboard')
 
       // const storageRef = ref(storage, avatar);
       // const uploadTask = uploadBytesResumable(storageRef, file);
