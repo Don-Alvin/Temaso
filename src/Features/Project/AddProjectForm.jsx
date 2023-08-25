@@ -20,7 +20,7 @@ const AddProjectForm = () => {
   const addNewProject = async (e) => {
     e.preventDefault()
     try {
-        await setDoc(doc(db, "projects", user.uid), {
+        await setDoc(doc(db, "projects", name), {
         uid: user.uid,
         name,
         description,

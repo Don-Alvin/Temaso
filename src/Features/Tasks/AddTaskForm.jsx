@@ -4,7 +4,7 @@ import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-toastify'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { addDoc, arrayUnion, collection, doc, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../../apis/firebase'
 import { useNavigate } from 'react-router-dom'
 
@@ -19,14 +19,18 @@ const AddTaskForm = () => {
 
   const createTask = async (e) => {
     e.preventDefault()
+    const docRef = doc(db, "projects", user.uid)
     try {
-        await addDoc(collection(db, "projects", user.uid, "tasks"), {
-        name,
-        description,
-        deadline,
-        assignedUser,
-        inProgress: true,
-        isCompleted: false
+        await updateDoc(docRef, {
+          tasks: arrayUnion({
+            name,
+            description,
+            deadline,
+            assignedUser,
+            inProgress: true,
+            isCompleted: false
+          })
+        
       })
       toast.success("New task assigned")
       navigate("/dashboard/project")

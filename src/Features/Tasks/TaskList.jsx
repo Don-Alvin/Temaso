@@ -2,8 +2,11 @@ import React from 'react'
 import Card from '../../ui/Card'
 import { Link } from 'react-router-dom'
 import { AiOutlineForm } from 'react-icons/ai'
+import { BeatLoader } from 'react-spinners'
+import { toast } from 'react-toastify'
 
 const TaskList = () => {
+
   return (
     <section>
         <Card>
@@ -15,10 +18,10 @@ const TaskList = () => {
             <span className='text-sm p-2'>Deadline: 18th, December</span>
             <span className='text-sm p-2'>Status: In progress</span>
             <div className='h-[1px] w-full bg-gray-700'></div>
-            <Link className='p-2 font-semibold flex items-center gap-2 '>
+            <div className='p-2 font-semibold flex items-center gap-2 '>
               Edit
               <AiOutlineForm className='text-lg'/>
-            </Link>
+            </div>
         </Card>
     </section>
   )

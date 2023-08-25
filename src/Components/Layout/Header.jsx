@@ -5,8 +5,10 @@ import { GiCancel } from 'react-icons/gi'
 import { useState } from 'react'
 import MenuModal from '../Modal/MenuModal'
 import { signOut } from 'firebase/auth'
-import { auth } from '../../apis/firebase'
+import { auth, db } from '../../apis/firebase'
 import useAuth from '../../hooks/useAuth'
+import { toast } from 'react-toastify'
+import { doc, updateDoc } from 'firebase/firestore'
 
 const Header = () => {
     const [isAuthMenuOpen, setIsAuthMenuOpen] = useState(false)
@@ -15,7 +17,7 @@ const Header = () => {
 
     const navigate = useNavigate();
 
-    const {user } = useAuth()
+    const {user, setUser } = useAuth()
 
     const handleAuthMenu = () => {
         setIsAuthMenuOpen(!isAuthMenuOpen)
@@ -37,9 +39,21 @@ const Header = () => {
         setIsSearchOpen(false)
     }
 
-    const handleLogout = () => {
-        signOut(auth)
-        navigate('/')
+    const handleLogout = async () => {
+        handleAuthMenu()
+        const docRef = doc(db, "users", user.uid)
+        try {
+           await updateDoc(docRef, {
+            online: false,
+          })
+            signOut(auth)
+            setUser(null)
+            navigate('/') 
+        } catch (error) {
+           throw new Error("Logout failed")
+           toast.error("error.message") 
+        }
+        
       };
 
   return (

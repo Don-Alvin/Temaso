@@ -4,7 +4,9 @@ import { useState } from "react"
 import { toast } from "react-toastify"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import MetaData from "../../Components/Meta/MetaData"
-import { auth } from "../../apis/firebase"
+import { auth, db } from "../../apis/firebase"
+import useAuth from "../../hooks/useAuth"
+import { doc, updateDoc } from "firebase/firestore"
 
 
 const Login = () => {
@@ -15,6 +17,8 @@ const Login = () => {
 
   const navigate = useNavigate()
 
+  const {user} = useAuth()
+
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
   }
@@ -22,7 +26,11 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      signInWithEmailAndPassword(auth, email, password);
+      const res = await signInWithEmailAndPassword(auth, email, password);
+      const docRef = doc(db, "users", res.user.uid)
+      await updateDoc(docRef, {
+        online: true,
+      })
       toast.success("Login successful");
       navigate("/dashboard");
     } catch (error) {
