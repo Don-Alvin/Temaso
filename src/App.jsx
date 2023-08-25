@@ -16,26 +16,24 @@ import Projects from "./Features/Project/Projects"
 import Tasks from "./Features/Tasks/Tasks"
 import AddProjectForm from "./Features/Project/AddProjectForm"
 import AddTaskForm from "./Features/Tasks/AddTaskForm"
-import useAuth from "./hooks/useAuth"
+import RequireAuth from "./helper/RequireAuth"
 
-const MainLayout = () => {
-  const user = useAuth()
-  return user ? <DashboardLayout /> : <LandingPage />
-}
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route>
       <Route path="/" element={<Layout />}>
-        <Route index element={<MainLayout />} />
+        <Route index element={<LandingPage />} />
         <Route path='login' element={<Login />} />
         <Route path="register" element={<Register />} />
-          <Route path="dashboard" element={<DashboardLayout />}>
+        <Route element={<RequireAuth />}>
+          <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Projects />} />
-          <Route path="project" element={<Tasks />}/>
-          <Route path="settings" element={<Settings />} />
-          <Route path="addproject" element={<AddProjectForm />} />
-          <Route path="project/addtask" element={<AddTaskForm />} />
+            <Route path="project" element={<Tasks />}/>
+            <Route path="settings" element={<Settings />} />
+            <Route path="addproject" element={<AddProjectForm />} />
+            <Route path="project/addtask" element={<AddTaskForm />} />
+          </Route>
         </Route>
         <Route path="*" element={<ErrorPage />}/>
       </Route>
