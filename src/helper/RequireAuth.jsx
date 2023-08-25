@@ -1,5 +1,4 @@
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import LandingPage from "../Pages/LandingPage";
 import useAuth from "../hooks/useAuth";
 
 const RequireAuth = () => {

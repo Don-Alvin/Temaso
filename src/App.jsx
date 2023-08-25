@@ -29,7 +29,7 @@ const router = createBrowserRouter(
         <Route element={<RequireAuth />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Projects />} />
-            <Route path="project" element={<Tasks />}/>
+            <Route path=":projectId" element={<Tasks />}/>
             <Route path="settings" element={<Settings />} />
             <Route path="addproject" element={<AddProjectForm />} />
             <Route path="project/addtask" element={<AddTaskForm />} />

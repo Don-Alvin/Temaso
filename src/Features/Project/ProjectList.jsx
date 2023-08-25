@@ -27,9 +27,16 @@ const ProjectList = () => {
             <span className='text-sm p-2'>Deadline: 18th, December</span>
             <span className='text-sm p-2'>Status: In progress</span>
             <div className='h-[1px] w-full bg-gray-700'></div>
-            <div className='p-2 font-semibold flex items-center gap-2 '>
-              Edit
-              <AiOutlineForm className='text-lg'/>
+            <div className='flex'>
+              <Link to=":projectId" className='p-2 font-semibold flex items-center gap-2 '>
+                <button className='border p-1 rounded text-white bg-teal-700'>Open</button>
+              </Link>
+              <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
+                <button className='border p-1 rounded text-white bg-orange-700'>Edit</button>
+              </Link>
+              <Link className='p-2 font-semibold flex items-center gap-2 '>
+                <button className='border p-1 rounded text-white bg-red-700'>Delete</button>
+              </Link>
             </div>
         </Card>
     </section>
