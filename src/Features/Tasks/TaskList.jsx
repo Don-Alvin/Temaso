@@ -5,18 +5,9 @@ import { useProjects } from '../../hooks/useProjects'
 import { BeatLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 
-const TaskList = () => {
+const TaskList = ({tasks}) => {
 
-  const {isInitialLoading, error, isError, projects} = useProjects()
-
-  let content;
-
-  if (isInitialLoading) content = <BeatLoader color="#36d7b7" />
-
-  if(isError) toast.error(error)
-
-  content = projects?.map(project => {
-          project.tasks.map(task => {
+  let content = tasks.map(task => {
             return (
               <div key={task.uid}>
                 <Card>
@@ -42,12 +33,11 @@ const TaskList = () => {
               </div>
             )
   })
-          
- } )
 
   return (
     <section>
-        {content}
+      {!tasks && <p>There are no tasks for this project</p>}
+      {content}
     </section>
   )
 }

@@ -26,7 +26,7 @@ const ProjectList = () => {
               <span className='text-sm p-2'>Status: {project.isCompleted ? Completed : "In progress"}</span>
               <div className='h-[1px] w-full bg-gray-700'></div>
               <div className='flex'>
-                <Link to=":projectId" className='p-2 font-semibold flex items-center gap-2 '>
+                <Link to={`/dashboard/${project.uid}`} className='p-2 font-semibold flex items-center gap-2 '>
                   <button className='border p-1 rounded text-white bg-teal-700'>Open</button>
                 </Link>
                 <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
