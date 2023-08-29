@@ -4,7 +4,7 @@ import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-toastify'
-import { addDoc, arrayUnion, collection, doc, setDoc, updateDoc } from 'firebase/firestore'
+import { Timestamp, addDoc, arrayUnion, collection, doc, setDoc, updateDoc } from 'firebase/firestore'
 import { db } from '../../apis/firebase'
 import { useNavigate } from 'react-router-dom'
 
@@ -25,7 +25,7 @@ const AddTaskForm = () => {
           tasks: arrayUnion({
             name,
             description,
-            deadline,
+            deadline: Timestamp.fromDate(new Date(deadline)),
             assignedUser,
             inProgress: true,
             isCompleted: false

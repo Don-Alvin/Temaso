@@ -17,6 +17,11 @@ const AddProjectForm = () => {
   const { user } = useAuth()
   const navigate = useNavigate()
 
+  const createdBy = {
+    name: user.displayName,
+    id: user.uid,
+  }
+
   const addNewProject = async (e) => {
     e.preventDefault()
     try {
@@ -25,7 +30,7 @@ const AddProjectForm = () => {
         name,
         description,
         duration,
-        createdBy: user.displayName,
+        createdBy,
         inProgress: true,
         isCompleted: false
       })
