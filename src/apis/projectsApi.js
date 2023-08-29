@@ -8,7 +8,6 @@ export const getProjects = async () => {
 		const q = query(collection(db, "projects"));
 		const response = await getDocs(q);
 		const projects = response.docs.map((document) => document.data());
-		console.log(projects);
 		return projects;
 	} catch (error) {
 		toast.error("Error fetching projects");
