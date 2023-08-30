@@ -32,7 +32,7 @@ const router = createBrowserRouter(
             <Route path=":projectId" element={<Tasks />}/>
             <Route path="settings" element={<Settings />} />
             <Route path="addproject" element={<AddProjectForm />} />
-            <Route path="project/addtask" element={<AddTaskForm />} />
+            <Route path=":projectId/addtask" element={<AddTaskForm />} />
           </Route>
         </Route>
         <Route path="*" element={<ErrorPage />}/>

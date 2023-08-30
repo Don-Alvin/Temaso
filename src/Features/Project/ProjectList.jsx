@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom'
 import { useProjects } from '../../hooks/useProjects'
 import { BeatLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
+import { IoMdAdd } from 'react-icons/io'
 
 const ProjectList = () => {
 
   const {isInitialLoading, error, isError, projects} = useProjects()
+
+  console.log(projects);
 
   let content;
 
@@ -41,8 +44,19 @@ const ProjectList = () => {
   ) )
 
   return (
-    <section>
-        {content}
+    <section className='w-full'>
+        {!projects ? (
+          <div className='flex flex-col w-[50%] items-center gap-8'>
+            <p className='text-xl font-medium'>You have not added any projects yet</p>
+            <Link to="addproject" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
+              <IoMdAdd />
+              <span>Add a new project</span>
+            </Link>
+          </div>
+        ) : (
+          content
+        )}
+        
     </section>
   )
 }

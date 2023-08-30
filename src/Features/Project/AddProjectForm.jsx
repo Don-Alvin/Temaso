@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import { doc, setDoc } from 'firebase/firestore'
+import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
+import { useUID } from 'react-uid'
 
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'
@@ -16,6 +17,7 @@ const AddProjectForm = () => {
 
   const { user } = useAuth()
   const navigate = useNavigate()
+  const uid = useUID()
 
   const createdBy = {
     name: user.displayName,
@@ -25,8 +27,8 @@ const AddProjectForm = () => {
   const addNewProject = async (e) => {
     e.preventDefault()
     try {
-        await setDoc(doc(db, "projects", user.uid), {
-        uid: user.uid,
+        await setDoc(doc(db, "projects", name), {
+        uid,
         name,
         description,
         duration,

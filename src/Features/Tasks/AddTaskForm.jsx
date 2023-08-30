@@ -4,9 +4,10 @@ import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
 import { toast } from 'react-toastify'
-import { Timestamp, addDoc, arrayUnion, collection, doc, setDoc, updateDoc } from 'firebase/firestore'
+import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore'
 import { db } from '../../apis/firebase'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useProjects } from '../../hooks/useProjects'
 
 const AddTaskForm = () => {
     const [name, setName] = useState("")
@@ -14,12 +15,17 @@ const AddTaskForm = () => {
     const [description, setDescription] = useState("")
     const [assignedUser, setAssignedUser] = useState("")
 
-    const { user } = useAuth()
     const navigate = useNavigate()
+
+    const {projectId } = useParams()
+    
+    const { projects } = useProjects()
+    const project = projects?.map(project => project.uid === projectId ? project : null).filter(Boolean)
+    const item = project[0]
 
   const createTask = async (e) => {
     e.preventDefault()
-    const docRef = doc(db, "projects", user.uid)
+    const docRef = doc(db, "projects", item.name )
     try {
         await updateDoc(docRef, {
           tasks: arrayUnion({
@@ -40,6 +46,7 @@ const AddTaskForm = () => {
       setAssignedUser("")
     } catch (error) {
       toast.error(error.message)
+      console.log(error);
     }
   }
 
