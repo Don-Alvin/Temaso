@@ -5,6 +5,8 @@ import { IoMdAdd } from 'react-icons/io'
 import TaskList from './TaskList'
 import { useProjects } from '../../hooks/useProjects'
 import useAuth from '../../hooks/useAuth'
+import { db } from '../../apis/firebase'
+import { arrayRemove, doc, updateDoc } from 'firebase/firestore'
 
 const Tasks = () => {
 
@@ -14,6 +16,19 @@ const Tasks = () => {
   const { projects } = useProjects()
   const userProjects = projects?.map(project => project.createdBy.id === user.uid ? project : null).filter(Boolean);
   const project = userProjects?.map(project => project.uid === projectId ? project : null).filter(Boolean)
+
+  const deleteTask = async (task) => {
+    const projectRef = doc(db, "projects", project[0].name)
+    try {
+      await updateDoc(projectRef, {
+        tasks: arrayRemove(task)
+      })
+    } catch (error) {
+      console.error(error)
+      console.log(error.message);
+      throw new Error("Could not delete task")
+    }
+  }
   
   const renderedProject = project?.map(item => (
     <div key={item.uid}>
@@ -25,7 +40,7 @@ const Tasks = () => {
         </Link>
       </header>
       <article className='p-4'>
-         {projects && <TaskList tasks={item.tasks} />}
+         {projects && <TaskList tasks={item.tasks} deleteTask={deleteTask} />}
       </article>
     </div>
   ))

@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom'
 import Card from '../../ui/Card'
 import { IoMdAdd } from 'react-icons/io'
 
-const TaskList = ({tasks}) => {
+const TaskList = ({tasks, deleteTask}) => {
+
 
   let content = tasks?.map((task) => {
             return (
@@ -19,8 +20,11 @@ const TaskList = ({tasks}) => {
                     <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
                       <button className='border p-1 rounded text-white bg-orange-700'>Edit</button>
                     </Link>
-                    <Link className='p-2 font-semibold flex items-center gap-2 '>
-                      <button className='border p-1 rounded text-white bg-red-700'>Delete</button>
+                    <Link 
+                      className='p-2 font-semibold flex items-center gap-2'
+                      onClick = {() => deleteTask(task)}
+                    >
+                      <p className='border p-1 rounded text-white bg-red-700'>Delete</p>
                     </Link>
                   </div>
                 </Card>
@@ -31,16 +35,16 @@ const TaskList = ({tasks}) => {
 
   return (
     <section className='w-full flex gap-3 flex-wrap'>
-      {!tasks ? (
+      {tasks.length ? (
+        content
+      ) : (
         <div className='flex flex-col w-[50%] items-center gap-8'>
           <p className='text-xl font-medium'>You have not assigned any tasks yet</p>
           <Link to="addtask" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
-          <IoMdAdd />
-          <span>Assign a new task</span>
-        </Link>
+            <IoMdAdd />
+            <span>Assign a new task</span>
+          </Link>
         </div>
-      ) : (
-        content
       )}
     
 </section>

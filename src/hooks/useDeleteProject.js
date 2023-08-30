@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 const useDeleteProject = () => {
 	const queryClient = useQueryClient();
 
-	const { isInitialLoading: isDeleting, mutate: deleteProject } = useMutation({
+	const { mutate: deleteProject } = useMutation({
 		mutationFn: deleteProjectFn,
 		onSuccess: () => {
 			toast.success("Project successfully deleted");
