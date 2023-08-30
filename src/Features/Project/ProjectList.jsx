@@ -2,23 +2,27 @@ import React from 'react'
 import Card from '../../ui/Card'
 import { Link } from 'react-router-dom'
 import { useProjects } from '../../hooks/useProjects'
+import useAuth from '../../hooks/useAuth'
 import { BeatLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import { IoMdAdd } from 'react-icons/io'
 
 const ProjectList = () => {
 
+  const {user} = useAuth()
+
   const {isInitialLoading, error, isError, projects} = useProjects()
 
-  console.log(projects);
 
+  const userProjects = projects?.map(project => project.createdBy.id === user.uid ? project : null).filter(Boolean);
+ 
   let content;
 
   if (isInitialLoading) content = <BeatLoader color="#36d7b7" />
 
   if(isError) toast.error(error)
 
-  content = projects?.map(project => (
+  content = userProjects?.map(project => (
           <div key={project.uid}>
             <Card>
               <h4 className='font-semibold p-2'>{project.name}</h4>
@@ -45,7 +49,7 @@ const ProjectList = () => {
 
   return (
     <section className='w-full'>
-        {!projects ? (
+        {userProjects.length === 0 ? (
           <div className='flex flex-col w-[50%] items-center gap-8'>
             <p className='text-xl font-medium'>You have not added any projects yet</p>
             <Link to="addproject" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>

@@ -4,13 +4,16 @@ import { Link, useParams } from 'react-router-dom'
 import { IoMdAdd } from 'react-icons/io'
 import TaskList from './TaskList'
 import { useProjects } from '../../hooks/useProjects'
+import useAuth from '../../hooks/useAuth'
 
 const Tasks = () => {
 
+  const { user } = useAuth()
+
   const { projectId } = useParams()
   const { projects } = useProjects()
-
-  const project = projects?.map(project => project.uid === projectId ? project : null).filter(Boolean)
+  const userProjects = projects?.map(project => project.createdBy.id === user.uid ? project : null).filter(Boolean);
+  const project = userProjects?.map(project => project.uid === projectId ? project : null).filter(Boolean)
   
   const renderedProject = project?.map(item => (
     <div key={item.uid}>
