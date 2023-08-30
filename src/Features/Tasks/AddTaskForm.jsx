@@ -39,7 +39,7 @@ const AddTaskForm = () => {
         
       })
       toast.success("New task assigned")
-      navigate("/dashboard/project")
+      navigate(`/dashboard/${projectId}`)
       setName('')
       setDeadline("")
       setDescription("")

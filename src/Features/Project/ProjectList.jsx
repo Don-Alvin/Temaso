@@ -6,13 +6,15 @@ import useAuth from '../../hooks/useAuth'
 import { BeatLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import { IoMdAdd } from 'react-icons/io'
+import { deleteProject } from '../../apis/projectsApi'
+import useDeleteProject from '../../hooks/useDeleteProject'
 
 const ProjectList = () => {
 
   const {user} = useAuth()
+  const { deleteProject } = useDeleteProject()
 
   const {isInitialLoading, error, isError, projects} = useProjects()
-
 
   const userProjects = projects?.map(project => project.createdBy.id === user.uid ? project : null).filter(Boolean);
  
@@ -36,11 +38,14 @@ const ProjectList = () => {
                 <Link to={`/dashboard/${project.uid}`} className='p-2 font-semibold flex items-center gap-2 '>
                   <button className='border p-1 rounded text-white bg-teal-700'>Open</button>
                 </Link>
-                <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
+                {/* <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
                   <button className='border p-1 rounded text-white bg-orange-700'>Edit</button>
-                </Link>
-                <Link className='p-2 font-semibold flex items-center gap-2 '>
-                  <button className='border p-1 rounded text-white bg-red-700'>Delete</button>
+                </Link> */}
+                <Link 
+                  className='p-2 font-semibold flex items-center gap-2'
+                  onClick={() => deleteProject(project.name)}
+                >
+                  <p className='border p-1 rounded text-white bg-red-700'>Delete</p>
                 </Link>
               </div>
             </Card>
@@ -48,8 +53,10 @@ const ProjectList = () => {
   ) )
 
   return (
-    <section className='w-full'>
-        {userProjects.length === 0 ? (
+    <section className='w-full flex gap-3 flex-wrap'>
+        {userProjects.length ? (
+          content
+        ) : (
           <div className='flex flex-col w-[50%] items-center gap-8'>
             <p className='text-xl font-medium'>You have not added any projects yet</p>
             <Link to="addproject" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
@@ -57,8 +64,6 @@ const ProjectList = () => {
               <span>Add a new project</span>
             </Link>
           </div>
-        ) : (
-          content
         )}
         
     </section>

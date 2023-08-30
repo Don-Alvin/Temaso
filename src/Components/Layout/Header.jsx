@@ -78,10 +78,10 @@ const Header = () => {
                     onClick={handleAuthMenu}
                 >
                     <AiOutlineMenu
-                        className='text-gray-700 hidden md:block' 
+                        className='text-gray-700 text-xl font-semibold' 
                     />
                     <CgProfile
-                        className='text-gray-700 cursor-pointer'
+                        className='text-gray-700 text-xl font-semibold'
                     />
 
                     {user && <p className='text-gray-700 font-semibold'>Hey, {user.displayName}</p>}

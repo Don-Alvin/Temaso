@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import Card from '../../ui/Card'
+import { IoMdAdd } from 'react-icons/io'
 
 const TaskList = ({tasks}) => {
 
@@ -29,10 +30,20 @@ const TaskList = ({tasks}) => {
   })
 
   return (
-    <section>
-      {!tasks && <p>There are no tasks for this project</p>}
-      {content}
-    </section>
+    <section className='w-full flex gap-3 flex-wrap'>
+      {!tasks ? (
+        <div className='flex flex-col w-[50%] items-center gap-8'>
+          <p className='text-xl font-medium'>You have not assigned any tasks yet</p>
+          <Link to="addtask" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
+          <IoMdAdd />
+          <span>Assign a new task</span>
+        </Link>
+        </div>
+      ) : (
+        content
+      )}
+    
+</section>
   )
 }
 

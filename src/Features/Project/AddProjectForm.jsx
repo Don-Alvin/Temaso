@@ -9,6 +9,7 @@ import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
 import { db } from '../../apis/firebase'
+import { nanoid } from 'nanoid'
 
 const AddProjectForm = () => {
   const [name, setName] = useState("")
@@ -17,7 +18,6 @@ const AddProjectForm = () => {
 
   const { user } = useAuth()
   const navigate = useNavigate()
-  const uid = useUID()
 
   const createdBy = {
     name: user.displayName,
@@ -28,7 +28,7 @@ const AddProjectForm = () => {
     e.preventDefault()
     try {
         await setDoc(doc(db, "projects", name), {
-        uid,
+        uid: nanoid(),
         name,
         description,
         duration,
