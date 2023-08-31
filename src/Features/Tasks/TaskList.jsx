@@ -35,7 +35,7 @@ const TaskList = ({tasks, deleteTask}) => {
 
   return (
     <section className='w-full flex gap-3 flex-wrap'>
-      {tasks.length ? (
+      {!tasks.length === 0 ? (
         content
       ) : (
         <div className='flex flex-col w-[50%] items-center gap-8'>

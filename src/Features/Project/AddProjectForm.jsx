@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { useUID } from 'react-uid'
 
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'

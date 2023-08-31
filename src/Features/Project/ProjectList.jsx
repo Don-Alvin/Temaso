@@ -54,7 +54,7 @@ const ProjectList = () => {
 
   return (
     <section className='w-full flex gap-3 flex-wrap'>
-        {userProjects.length ? (
+        {!userProjects.length === 0 ? (
           content
         ) : (
           <div className='flex flex-col w-[50%] items-center gap-8'>
