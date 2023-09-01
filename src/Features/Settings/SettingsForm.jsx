@@ -5,10 +5,13 @@ import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { db, storage } from '../../apis/firebase'
 import useAuth from '../../hooks/useAuth'
 import { Timestamp, doc, updateDoc } from 'firebase/firestore'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 const SettingsForm = () => {
 
     const { user } = useAuth()
+    const navigate = useNavigate("")
 
     const [name, setName] = useState("")
     const [profilePicture, setProfilePicture] = useState(null)
@@ -25,7 +28,6 @@ const SettingsForm = () => {
 
     const handleChange = async(e) => {
         e.preventDefault()
-        console.log(name, profilePicture.name, gender.value, dateOfBirth);
         try {
             const storageRef = ref(storage, `${user.email}/images/${profilePicture.name}` )
             const uploadTask = uploadBytesResumable(storageRef, profilePicture)
@@ -42,6 +44,8 @@ const SettingsForm = () => {
                     })
                 }
             )
+            toast.success("Profile updated successfully")
+            navigate('/dashboard')
         } catch (error) {
            console.error(error) 
         }
