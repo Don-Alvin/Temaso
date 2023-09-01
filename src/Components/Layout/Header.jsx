@@ -81,7 +81,7 @@ const Header = () => {
                         className='text-gray-700 text-xl font-semibold' 
                     /> */}
 
-                    {user ? <img className="w-[30px] h-[30px] object-cover rounded-full" src={user.photoURL} alt={user.displayName} /> : (
+                    {user.photoURL ? <img className="w-[30px] h-[30px] object-cover rounded-full" src={user.photoURL} alt={user.displayName} /> : (
                        <CgProfile
                         className='text-gray-700 text-xl font-semibold'
                     /> 
