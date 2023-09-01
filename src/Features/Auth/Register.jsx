@@ -37,7 +37,8 @@ const Register = () => {
         uid: res.user.uid,
         displayName,
         email,
-        online: true
+        online: true,
+        photoUrl: ""
       });
       toast.success('Registration successfull')
       navigate('/dashboard')

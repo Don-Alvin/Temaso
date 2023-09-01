@@ -1,10 +1,10 @@
 import React from 'react'
 
-const InputField = ({value, label, placeholder, onChange, id, type}) => {
+const InputField = ({value, label, placeholder, onChange, id, type, accept}) => {
   return (
     <div className='flex flex-col'>
         {label && <label htmlFor={id}>{label}</label>}
-        <input
+      <input
         type={type}
         id={id}
         value={value}
@@ -12,7 +12,8 @@ const InputField = ({value, label, placeholder, onChange, id, type}) => {
         required
         placeholder={placeholder}
         onChange={onChange}
-    />
+        accept={accept}
+      />
     </div>
     
   )
