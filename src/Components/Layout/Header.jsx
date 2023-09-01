@@ -77,12 +77,17 @@ const Header = () => {
                     className='flex items-center gap-2 border p-1 rounded cursor-pointer'
                     onClick={handleAuthMenu}
                 >
-                    <AiOutlineMenu
+                    {/* <AiOutlineMenu
                         className='text-gray-700 text-xl font-semibold' 
-                    />
-                    <CgProfile
+                    /> */}
+
+                    {user ? <img className="w-[30px] h-[30px] object-cover rounded-full" src={user.photoURL} alt={user.displayName} /> : (
+                       <CgProfile
                         className='text-gray-700 text-xl font-semibold'
-                    />
+                    /> 
+                    )}
+
+                    
 
                     {user && <p className='text-gray-700 font-semibold'>Hey, {user.displayName}</p>}
 

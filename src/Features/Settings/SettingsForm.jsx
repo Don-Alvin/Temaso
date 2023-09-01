@@ -7,6 +7,7 @@ import useAuth from '../../hooks/useAuth'
 import { Timestamp, doc, updateDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { updateProfile } from 'firebase/auth'
 
 const SettingsForm = () => {
 
@@ -29,7 +30,7 @@ const SettingsForm = () => {
     const handleChange = async(e) => {
         e.preventDefault()
         try {
-            const storageRef = ref(storage, `${user.email}/images/${profilePicture.name}` )
+            const storageRef = ref(storage, `${user.email}/images/${profilePicture?.name}` )
             const uploadTask = uploadBytesResumable(storageRef, profilePicture)
             uploadTask.on('state_changed',
                 ()=> {
@@ -41,6 +42,10 @@ const SettingsForm = () => {
                             dateOfBirth: Timestamp.fromDate(new Date(dateOfBirth)),
                             gender: gender?.value || null
                           });
+                        await updateProfile(user, {
+                            photoURL: downloadUrl,
+                            displayName: name
+                        })
                     })
                 }
             )
