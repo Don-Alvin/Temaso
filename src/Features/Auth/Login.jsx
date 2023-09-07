@@ -3,30 +3,25 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { useState } from "react"
 import { toast } from "react-toastify"
 import { signInWithEmailAndPassword } from "firebase/auth"
+import { doc, updateDoc } from "firebase/firestore"
+import { useFormik } from "formik"
 import MetaData from "../../Components/Meta/MetaData"
 import { auth, db } from "../../apis/firebase"
-import useAuth from "../../hooks/useAuth"
-import { doc, updateDoc } from "firebase/firestore"
+import { loginSchema } from "./Schemas"
 
 
 const Login = () => {
 
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
   const [passwordVisible, setPasswordVisible] = useState(false)
-
   const navigate = useNavigate()
-
-  const {user} = useAuth()
 
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
+  const onSubmit = async () => {
     try {
-      const res = await signInWithEmailAndPassword(auth, email, password);
+      const res = await signInWithEmailAndPassword(auth, values.email, values.password);
       const docRef = doc(db, "users", res.user.uid)
       await updateDoc(docRef, {
         online: true,
@@ -37,6 +32,17 @@ const Login = () => {
       toast.error(error);
     }
   }
+
+  const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({
+    initialValues: {
+      displayName: "",
+      email: "",
+      password: ""
+    },
+    validationSchema: loginSchema,
+    onSubmit
+  }
+  )
 
   return (
     <section className='w-full h-screen  flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
@@ -53,8 +59,10 @@ const Login = () => {
                 <input
                   className='p-2 border rounded-lg outline-teal-700'
                   type="email"
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
+                  id="email"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.email}
                   placeholder='Enter your email'
                 />
               </div>
@@ -63,8 +71,10 @@ const Login = () => {
               <input
                 className='p-2 border rounded-lg outline-teal-700'
                 type={!passwordVisible ? 'password' : 'text'}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                id="password"
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.password}
                 placeholder='Enter your password'
               />
               {passwordVisible && <AiOutlineEyeInvisible  className="absolute top-[33%] right-2" onClick={handlePassword}/>}

@@ -12,6 +12,14 @@ import { registerSchema } from "./Schemas";
 
 const Register = () => {
 
+  const [passwordVisible, setPasswordVisible] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handlePassword = () => {
+    setPasswordVisible(!passwordVisible)
+  }
+
   const onSubmit = async() => {
     try {
       const res = await createUserWithEmailAndPassword(auth, values.email, values.password);
@@ -42,14 +50,6 @@ const Register = () => {
     onSubmit
   }
   )
-
-  const [passwordVisible, setPasswordVisible] = useState(false)
-
-  const navigate = useNavigate()
-
-  const handlePassword = () => {
-    setPasswordVisible(!passwordVisible)
-  }
 
 
   return (
