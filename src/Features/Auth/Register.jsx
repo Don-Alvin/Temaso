@@ -93,9 +93,9 @@ const Register = () => {
                   <input
                     className={`p-2 border rounded-lg ${errors.displayName && touched.displayName ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
                     type="text"
+                    value={values.displayName}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    value={values.displayName}
                     id="displayName"
                     placeholder='Enter your username'
                     autoComplete="off"
