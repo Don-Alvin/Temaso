@@ -7,7 +7,7 @@ export const addProjectSchema = yup.object().shape({
 		.required("Please enter name of your project"),
 	description: yup
 		.string()
-		.min(50, "Project description must have atleast 50 characters")
+		.min(25, "Project description must have atleast 25 characters")
 		.required("Please enter a description for your project"),
 	duration: yup.string().required("Please enter duration"),
 });
