@@ -1,19 +1,16 @@
-import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore'
+import { useNavigate, useParams } from 'react-router-dom'
+import { useFormik } from 'formik'
+import { db } from '../../apis/firebase'
+
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
-import useAuth from '../../hooks/useAuth'
-import { toast } from 'react-toastify'
-import { Timestamp, arrayUnion, doc, updateDoc } from 'firebase/firestore'
-import { db } from '../../apis/firebase'
-import { useNavigate, useParams } from 'react-router-dom'
 import { useProjects } from '../../hooks/useProjects'
+import { addTaskSchema } from './Schemas'
 
 const AddTaskForm = () => {
-    const [name, setName] = useState("")
-    const [deadline, setDeadline] = useState("")
-    const [description, setDescription] = useState("")
-    const [assignedUser, setAssignedUser] = useState("")
 
     const navigate = useNavigate()
 
@@ -23,16 +20,15 @@ const AddTaskForm = () => {
     const project = projects?.map(project => project.uid === projectId ? project : null).filter(Boolean)
     const item = project[0]
 
-  const createTask = async (e) => {
-    e.preventDefault()
+  const onSubmit = async () => {
     const docRef = doc(db, "projects", item.name )
     try {
         await updateDoc(docRef, {
           tasks: arrayUnion({
-            name,
-            description,
-            deadline: Timestamp.fromDate(new Date(deadline)),
-            assignedUser,
+            name:values.name,
+            description:values.description,
+            deadline: Timestamp.fromDate(new Date(values.deadline)),
+            assignedUser:values.assignedUser,
             inProgress: true,
             isCompleted: false
           })
@@ -46,9 +42,20 @@ const AddTaskForm = () => {
       setAssignedUser("")
     } catch (error) {
       toast.error(error.message)
-      console.log(error);
     }
   }
+
+  const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({
+    initialValues: {
+      name: "",
+      description: "",
+      deadline: "",
+      assignedUser: ""
+    },
+    validationSchema: addTaskSchema,
+    onSubmit
+  }
+  )
 
   return (
     <section className='w-full'>
@@ -57,33 +64,48 @@ const AddTaskForm = () => {
         <h4 className='p-6 text-gray-700 text-lg font-medium'>Create and assign project tasks</h4>
       </header>
       <article className='w-[70%] mx-auto'>
-        <form className='p-6 text-gray-700 grid gap-4' onSubmit={createTask}>
+        <form className='p-6 text-gray-700 grid gap-4' onSubmit={handleSubmit}>
           <InputField 
             type="text"
-            value={name}
             placeholder="Enter name of task"
-            onChange={(e) => setName(e.target.value)}
+            className={errors.name && touched.name ? `outline outline-1 outline-red-700` : `outline-teal-700`}
+            value={values.name}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="name"
           />
+          {errors.name && touched.name && <p className='text-red-700'>{errors.name}</p>}
           <TextArea
              placeholder="Describe the task"
              cols="30"
              rows="5"
-             value={description}
-             onChange={(e) => setDescription(e.target.value)}
+             className={errors.description && touched.description ? `outline outline-1 outline-red-700` : `outline-teal-700`}
+             value={values.description}
+             onChange={handleChange}
+             onBlur={handleBlur}
+             id="description"
           />
+          {errors.description && touched.description && <p className='text-red-700'>{errors.description}</p>}
           <InputField
             type="date"
-            value={deadline}
-            onChange={(e) => setDeadline(e.target.value)}
+            className={errors.date && touched.date ? `outline outline-1 outline-red-700` : `outline-teal-700`}
+            value={values.deadline}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="deadline"
           />
-
+          {errors.deadline && touched.deadline && <p className='text-red-700'>{errors.deadline}</p>}
           <InputField 
             type="text"
-            value={assignedUser}
             placeholder="Assign task to"
-            onChange={(e) => setAssignedUser(e.target.value)}
+            className={errors.assignedUser && touched.assignedUser ? `outline outline-1 outline-red-700` : `outline-teal-700`}
+            value={values.assignedUser}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            id="assignedUser"
           />
-          <button className='bg-teal-700 text-white rounded p-2'>Add</button>
+          {errors.assignedUser && touched.assignedUser && <p className='text-red-700'>{errors.assignedUser}</p>}
+          <button type='submit' disabled={isSubmitting} className='bg-teal-700 text-white rounded p-2'>Add</button>
         </form>
       </article>
     </section>

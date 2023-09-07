@@ -1,16 +1,19 @@
-import React from 'react'
+import classNames from "classnames"
 
-const TextArea = ({id, cols, name, rows, placeholder, value, onChange}) => {
+const TextArea = ({id, cols, name, rows, placeholder, value, onChange, ...rest}) => {
+
+  const classes = classNames('border rounded shadow p-4', rest.className)
+
   return (
     <textarea
-     className='border rounded shadow p-4 outline-teal-950'
+     className={classes}
      name={name} 
-     id={id} cols={cols} 
+     id={id} 
+     cols={cols} 
      rows={rows} 
      placeholder={placeholder}
      value={value}
      onChange={onChange}
-     required
     /> 
   )
 }

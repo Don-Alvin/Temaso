@@ -6,7 +6,6 @@ import useAuth from '../../hooks/useAuth'
 import { BeatLoader } from 'react-spinners'
 import { toast } from 'react-toastify'
 import { IoMdAdd } from 'react-icons/io'
-import { deleteProject } from '../../apis/projectsApi'
 import useDeleteProject from '../../hooks/useDeleteProject'
 
 const ProjectList = () => {
@@ -23,6 +22,7 @@ const ProjectList = () => {
   if (isInitialLoading) content = <BeatLoader color="#36d7b7" />
 
   if(isError) toast.error(error)
+
 
   content = userProjects?.map(project => (
           <div key={project.uid}>
@@ -54,7 +54,7 @@ const ProjectList = () => {
 
   return (
     <section className='w-full flex gap-3 flex-wrap'>
-        {!userProjects === null ? (
+        {userProjects ? (
           content
         ) : (
           <div className='flex flex-col w-[50%] items-center gap-8'>
