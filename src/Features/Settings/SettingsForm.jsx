@@ -39,7 +39,7 @@ const SettingsForm = () => {
                         await updateDoc(docRef, {
                             displayName: name,
                             photoUrl: downloadUrl,
-                            dateOfBirth: Timestamp.fromDate(new Date(dateOfBirth)),
+                            dateOfBirth: dateOfBirth || null,
                             gender: gender?.value || null
                           });
                         await updateProfile(user, {
