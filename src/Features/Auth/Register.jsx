@@ -13,25 +13,23 @@ import { registerSchema } from "./Schemas";
 const Register = () => {
 
   const onSubmit = async() => {
-    console.log(values);
-    // try {
-    //   const res = await createUserWithEmailAndPassword(auth, email, password);
-    //   console.log(res.user);
-    //   await updateProfile(res.user, {
-    //     displayName
-    //   })
-    //   await setDoc(doc(db, "users", res.user.uid), {
-    //     uid: res.user.uid,
-    //     displayName,
-    //     email,
-    //     online: true,
-    //     photoUrl: ""
-    //   });
-    //   toast.success('Registration successfull')
-    //   navigate('/dashboard')
-    // } catch (error) {
-    //   toast.error(error.message);
-    // }
+    try {
+      const res = await createUserWithEmailAndPassword(auth, values.email, values.password);
+      await updateProfile(res.user, {
+        displayName: values.displayName
+      })
+      await setDoc(doc(db, "users", res.user.uid), {
+        uid: res.user.uid,
+        displayName: values.displayName,
+        email: values.displayName,
+        online: true,
+        photoUrl: ""
+      });
+      toast.success('Registration successfull')
+      navigate('/dashboard')
+    } catch (error) {
+      toast.error(error.message);
+    }
   }
 
   const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({
@@ -107,7 +105,7 @@ const Register = () => {
                     {passwordVisible && <AiOutlineEyeInvisible  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
                     {!passwordVisible && <AiOutlineEye  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
                   </div>
-              <button type="submit" className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
+              <button type="submit" disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
         </form>
         <div className='py-4'>
