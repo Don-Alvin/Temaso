@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore'
+import { doc, setDoc } from 'firebase/firestore'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
@@ -23,24 +22,22 @@ const AddProjectForm = () => {
   }
 
   const onSubmit = async () => {
-    console.log(values);
-    // try {
-    //     await setDoc(doc(db, "projects", values.name), {
-    //     uid: nanoid(),
-    //     name:values.name,
-    //     description: values.description,
-    //     duration: values.description,
-    //     createdBy,
-    //     inProgress: true,
-    //     isCompleted: false
-    //   })
-    //   navigate('/dashboard')
-    //   toast.success("New project added")
-    //   actions.resetForm()
-    // } catch (error) {
-    //   toast.error(error.message)
-    //   console.log(error.message);
-    // }
+    try {
+        await setDoc(doc(db, "projects", values.name), {
+        uid: nanoid(),
+        name:values.name,
+        description: values.description,
+        duration: values.duration,
+        createdBy,
+        inProgress: true,
+        isCompleted: false
+      })
+      toast.success("New project added")
+      navigate('/dashboard')
+    } catch (error) {
+      toast.error(error.message)
+      console.log(error.message);
+    }
   }
 
   const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({

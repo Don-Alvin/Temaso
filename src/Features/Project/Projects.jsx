@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom'
 import { IoMdAdd } from 'react-icons/io'
 import MetaData from '../../Components/Meta/MetaData'
 import ProjectList from './ProjectList'
-import useAuth from '../../hooks/useAuth'
 
 const Projects = () => {
-
-  const {user} = useAuth()
-  console.log(user);
   return (
     <section className='text-gray-700 w-full'>
       <MetaData title={"Your projects"} />
