@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
+import { FcGoogle } from 'react-icons/fc'
 import { toast } from "react-toastify"
 import { doc, setDoc } from "firebase/firestore"; 
 import { auth, db } from "../../apis/firebase"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth"
 import { useFormik } from "formik";
 import MetaData from "../../Components/Meta/MetaData"
 import { registerSchema } from "./Schemas";
@@ -15,6 +16,7 @@ const Register = () => {
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   const navigate = useNavigate()
+  const provider = new GoogleAuthProvider()
 
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
@@ -40,6 +42,26 @@ const Register = () => {
     }
   }
 
+  const registerWithGoogle = async() => {
+    try {
+      const res = await signInWithPopup(auth, provider)
+      const user = res.user
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        online: true,
+        photoUrl: user.photoURL
+      });
+      toast.success('Login successfull')
+      navigate('/dashboard')
+    } catch (error) {
+      // toast.error(error.message)
+      console.error(error)
+    }
+    
+  }
+
   const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({
     initialValues: {
       displayName: "",
@@ -55,11 +77,19 @@ const Register = () => {
   return (
     <section className='w-full flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
       <MetaData title={'Register an account'} />
-      <div className="flex justify-center flex-col items-center border p-6 h-[auto] my-20 gap-4  border-teal-700 rounded-lg shadow-teal-700 shadow-md bg-white opacity-90 w-[90%] md:w-auto">
+      <div className="flex justify-center flex-col items-center border p-6 h-[auto] my-20 gap-2  border-teal-700 rounded-lg shadow-teal-700 shadow-md bg-white opacity-90 w-[90%] md:w-auto">
         <div className="title flex flex-col items-center">
           <h4 className="text-3xl text-gray-700 text-center">Explore more by joining us</h4>
         </div>
-        <form className='py-2 w-[90%]' onSubmit={handleSubmit}>
+        <button 
+          className="shadow flex items-center rounded"
+          onClick={registerWithGoogle}
+        >
+          <FcGoogle className="w-6"/>
+          <p className="text-white bg-teal-700 p-1 font-semibold rounded-r">Register with google</p>
+        </button>
+        <span className="text-gray-700 font-semibold">OR</span>
+        <form className='w-[90%]' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-4 items-center'>
                 <div className='flex flex-col gap-2 w-[100%]'>
                   <label className="text-gray-700 text-md">Name</label>
@@ -108,7 +138,7 @@ const Register = () => {
               <button type="submit" disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
         </form>
-        <div className='py-4'>
+        <div>
           <span className='text-gray-700'>Already registered? <Link to='/login' className='text-teal-700'>Log in</Link></span>
         </div>
         
