@@ -91,7 +91,7 @@ const Register = () => {
                 <div className='flex flex-col gap-2 w-[100%]'>
                   <label className="text-gray-700 text-md">Name</label>
                   <input
-                    className={`p-2 border rounded-lg outline-teal-700 ${errors.displayName && touched.displayName && `outline-red-700`}`}
+                    className={`p-2 border rounded-lg ${errors.displayName && touched.displayName ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
                     type="text"
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -105,7 +105,7 @@ const Register = () => {
                 <div className='flex flex-col gap-2 w-[100%]'>
                   <label className="text-gray-700 text-md">Email</label>
                   <input
-                    className={`p-2 border rounded-lg outline-teal-700 ${errors.email && touched.email && `outline-red-700`}`}
+                    className={`p-2 border rounded-lg ${errors.email && touched.email ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
                     type="email"
                     id="email"
                     onChange={handleChange}
@@ -119,7 +119,7 @@ const Register = () => {
                   <div className='flex flex-col gap-2 relative w-[100%]'>
                     <label className="text-gray-700 text-md">Password</label>
                     <input
-                      className={`p-2 border rounded-lg outline-teal-700 ${errors.password && touched.password && `outline-red-700`}`}
+                      className={`p-2 border rounded-lg ${errors.password && touched.password ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
                       type={!passwordVisible ? 'password' : 'text'}
                       id="password"
                       onChange={handleChange}

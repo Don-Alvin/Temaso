@@ -77,7 +77,7 @@ const Login = () => {
               <div className='flex flex-col gap-2 w-[100%]'>
                 <label className="sr-only text-gray-700 text-xl">Email</label>
                 <input
-                  className={`p-2 border rounded-lg outline-teal-700 ${errors.email && touched.email && `outline-red-700`}`}
+                  className={`p-2 border rounded-lg ${errors.email && touched.email ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
                   type="email"
                   id="email"
                   onChange={handleChange}
@@ -90,7 +90,7 @@ const Login = () => {
             <div className='flex flex-col gap-2 relative'>
               <label className="sr-only text-gray-700 text-xl">Password</label>
               <input
-                className={`p-2 border rounded-lg outline-teal-700 ${errors.password && touched.password && `outline-red-700`}`}
+                className={`p-2 border rounded-lg ${errors.password && touched.password ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
                 type={!passwordVisible ? 'password' : 'text'}
                 id="password"
                 onChange={handleChange}
@@ -99,8 +99,8 @@ const Login = () => {
                 placeholder='Enter your password'
               />
               {errors.password && touched.password && <p className='text-red-700'>{errors.password}</p>}
-              {passwordVisible && <AiOutlineEyeInvisible  className="absolute top-[33%] right-2" onClick={handlePassword}/>}
-              {!passwordVisible && <AiOutlineEye  className="absolute top-[33%] right-2" onClick={handlePassword}/>}
+              {passwordVisible && <AiOutlineEyeInvisible  className={`absolute ${errors.password && touched.password && `top-[20%]`} top-[33%] right-3`} onClick={handlePassword}/>}
+              {!passwordVisible && <AiOutlineEye  className={`absolute ${errors.password && touched.password && `top-[20%]`} top-[33%] right-3`} onClick={handlePassword}/>}
             </div>
             <button type='submit' disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold'>Log in</button>
           </div>
