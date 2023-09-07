@@ -1,147 +1,141 @@
+import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
-import { RxAvatar } from "react-icons/rx"
-import { useState } from "react"
+import { FcGoogle } from 'react-icons/fc'
 import { toast } from "react-toastify"
 import { doc, setDoc } from "firebase/firestore"; 
-import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage"
+import { auth, db } from "../../apis/firebase"
+import { GoogleAuthProvider, createUserWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth"
+import { useFormik } from "formik";
 import MetaData from "../../Components/Meta/MetaData"
-import { auth, db, storage } from "../../apis/firebase"
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-
-
+import { registerSchema } from "./Schemas";
 
 
 const Register = () => {
 
-  const [displayName, setDisplayName] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   const navigate = useNavigate()
+  const provider = new GoogleAuthProvider()
 
   const handlePassword = () => {
     setPasswordVisible(!passwordVisible)
   }
 
-  const handleRegister = async(e) => {
-    e.preventDefault()
+  const onSubmit = async() => {
     try {
-      const res = await createUserWithEmailAndPassword(auth, email, password);
-      console.log(res.user);
+      const res = await createUserWithEmailAndPassword(auth, values.email, values.password);
       await updateProfile(res.user, {
-        displayName
+        displayName: values.displayName
       })
       await setDoc(doc(db, "users", res.user.uid), {
         uid: res.user.uid,
-        displayName,
-        email,
+        displayName: values.displayName,
+        email: values.displayName,
         online: true,
         photoUrl: ""
       });
       toast.success('Registration successfull')
       navigate('/dashboard')
-
-      // const storageRef = ref(storage, avatar);
-      // const uploadTask = uploadBytesResumable(storageRef, file);
-
-      // Register three observers:
-      // uploadTask.on('state_changed', 
-      // (snapshot) => {
-      //   // Observe state change events such as progress, pause, and resume
-      //   // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-      //   switch (snapshot.state) {
-      //     case 'paused':
-      //       console.log('Upload is paused');
-      //       break;
-      //     case 'running':
-      //       console.log('Upload is running');
-      //       break;
-      //   }
-      // },
-      //   (error) => {
-      //     toast.error(error.message)
-      //   }, 
-      //   () => {
-      //     getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-      //       await updateProfile(res.user, {
-      //         displayName,
-      //         photoURL: downloadURL
-      //       })
-      //     });
-      //   }
-      // );
     } catch (error) {
       toast.error(error.message);
     }
   }
 
+  const registerWithGoogle = async() => {
+    try {
+      const res = await signInWithPopup(auth, provider)
+      const user = res.user
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        online: true,
+        photoUrl: user.photoURL
+      });
+      toast.success('Login successfull')
+      navigate('/dashboard')
+    } catch (error) {
+      toast.error(error.message)
+    } 
+  }
+
+  const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({
+    initialValues: {
+      displayName: "",
+      email: "",
+      password: ""
+    },
+    validationSchema: registerSchema,
+    onSubmit
+  }
+  )
+
   return (
     <section className='w-full flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
       <MetaData title={'Register an account'} />
-      <div className="flex justify-center flex-col items-center border p-6 h-[auto] my-20 gap-4  border-teal-700 rounded-lg shadow-teal-700 shadow-md bg-white opacity-90 w-[90%] md:w-auto">
+      <div className="flex justify-center flex-col items-center border p-6 h-[auto] my-20 gap-2  border-teal-700 rounded-lg shadow-teal-700 shadow-md bg-white opacity-90 w-[90%] md:w-auto">
         <div className="title flex flex-col items-center">
           <h4 className="text-3xl text-gray-700 text-center">Explore more by joining us</h4>
         </div>
-        <form className='py-2 w-[90%]' onSubmit={handleRegister}>
+        <button 
+          className="shadow flex items-center rounded"
+          onClick={registerWithGoogle}
+        >
+          <FcGoogle className="w-6"/>
+          <p className="text-white bg-teal-700 p-1 font-semibold rounded-r">Register with google</p>
+        </button>
+        <span className="text-gray-700 font-semibold">OR</span>
+        <form className='w-[90%]' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-4 items-center'>
                 <div className='flex flex-col gap-2 w-[100%]'>
                   <label className="text-gray-700 text-md">Name</label>
                   <input
-                    className='p-2 border rounded-lg outline-teal-700 '
+                    className={`p-2 border rounded-lg outline-teal-700 ${errors.displayName && touched.displayName && `outline-red-700`}`}
                     type="text"
-                    required
-                    onChange={(e) => setDisplayName(e.target.value)}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.displayName}
+                    id="displayName"
                     placeholder='Enter your username'
                     autoComplete="off"
                   />
+                  {errors.displayName && touched.displayName && <p className='text-red-700'>{errors.displayName}</p>}
                 </div>
                 <div className='flex flex-col gap-2 w-[100%]'>
                   <label className="text-gray-700 text-md">Email</label>
                   <input
-                    className='p-2 border rounded-lg outline-teal-700 '
+                    className={`p-2 border rounded-lg outline-teal-700 ${errors.email && touched.email && `outline-red-700`}`}
                     type="email"
-                    required
-                    onChange={(e) => setEmail(e.target.value)}
+                    id="email"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    value={values.email}
                     placeholder='Enter your email'
                     autoComplete="off"
                   />
+                  {errors.email && touched.email && <p className='text-red-700'>{errors.email}</p>}
                 </div>
                   <div className='flex flex-col gap-2 relative w-[100%]'>
                     <label className="text-gray-700 text-md">Password</label>
                     <input
-                      className='p-2 border rounded-lg outline-teal-700'
+                      className={`p-2 border rounded-lg outline-teal-700 ${errors.password && touched.password && `outline-red-700`}`}
                       type={!passwordVisible ? 'password' : 'text'}
-                      onChange={(e) =>  setPassword(e.target.value)}
-                      required
+                      id="password"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password}
                       placeholder='Enter your password'
                       autoComplete="off"
                     />
-                    {passwordVisible && <AiOutlineEyeInvisible  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
-                    {!passwordVisible && <AiOutlineEye  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
+                    {passwordVisible && <AiOutlineEyeInvisible  className={`absolute ${errors.password && touched.password && `top-[42%]`} top-[62%] right-3`} onClick={handlePassword}/>}
+                    {!passwordVisible && <AiOutlineEye  className={`absolute ${errors.password && touched.password && `top-[42%]`} top-[62%] right-3`} onClick={handlePassword}/>}
+                    {errors.password && touched.password && <p className='text-red-700'>{errors.password}</p>}
                   </div>
-                  {/* <div>
-                    <input
-                     type='file'
-                     onChange={(e) => setAvatar(e.target.value)}
-                     className="hidden"
-                     id="file"
-                    />
-                    <label 
-                      htmlFor="avatar"
-                      className="text-gray-700 flex items-center gap-2 cursor-pointer"
-                    >
-                      <RxAvatar
-                        className="text-3xl"
-                      />
-                      <p>Add a profile picture</p>
-                    </label>
-                  </div> */}
-              <button type="submit" className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
+              <button type="submit" disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
         </form>
-        <div className='py-4'>
+        <div>
           <span className='text-gray-700'>Already registered? <Link to='/login' className='text-teal-700'>Log in</Link></span>
         </div>
         

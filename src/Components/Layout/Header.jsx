@@ -71,26 +71,20 @@ const Header = () => {
                 </div>
             </div>
 
-            <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-4">
                 {user && <Link to="dashboard" className='text-white border rounded p-1 bg-teal-700'>Dashboard</Link>}
                 <div 
                     className='flex items-center gap-2 border p-1 rounded cursor-pointer'
                     onClick={handleAuthMenu}
                 >
-                    {/* <AiOutlineMenu
-                        className='text-gray-700 text-xl font-semibold' 
-                    /> */}
-
                     {user ? 
                          user.photoURL ? <img className="w-[30px] h-[30px] object-cover rounded-full" src={user.photoURL} alt={user.displayName} /> : <CgProfile className='text-gray-700 text-xl font-semibold' /> 
                          : (
                                 <CgProfile
-                                    className='text-gray-700 text-xl font-semibold'
+                                    className={`text-gray-700 ${user ? `text-xl` : `text-3xl`}  font-semibold`}
                                 /> 
                             )
                     }
-
-                    
 
                     {user && <p className='text-gray-700 font-semibold'>Hey, {user.displayName}</p>}
 
