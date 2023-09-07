@@ -56,10 +56,8 @@ const Register = () => {
       toast.success('Login successfull')
       navigate('/dashboard')
     } catch (error) {
-      // toast.error(error.message)
-      console.error(error)
-    }
-    
+      toast.error(error.message)
+    } 
   }
 
   const {values, errors, handleBlur, handleChange, handleSubmit, touched, isSubmitting} = useFormik({
@@ -72,7 +70,6 @@ const Register = () => {
     onSubmit
   }
   )
-
 
   return (
     <section className='w-full flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
@@ -131,9 +128,9 @@ const Register = () => {
                       placeholder='Enter your password'
                       autoComplete="off"
                     />
+                    {passwordVisible && <AiOutlineEyeInvisible  className={`absolute ${errors.password && touched.password && `top-[42%]`} top-[62%] right-3`} onClick={handlePassword}/>}
+                    {!passwordVisible && <AiOutlineEye  className={`absolute ${errors.password && touched.password && `top-[42%]`} top-[62%] right-3`} onClick={handlePassword}/>}
                     {errors.password && touched.password && <p className='text-red-700'>{errors.password}</p>}
-                    {passwordVisible && <AiOutlineEyeInvisible  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
-                    {!passwordVisible && <AiOutlineEye  className="absolute top-[62%] right-3" onClick={handlePassword}/>}
                   </div>
               <button type="submit" disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
