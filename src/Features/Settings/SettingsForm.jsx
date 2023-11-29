@@ -89,7 +89,7 @@ const SettingsForm = () => {
                     isSearchable
                 />
             </label>
-        <button onClick={handleChange} className='text-white bg-teal-700 p-1 rounded'>Save</button>
+        <button onClick={handleChange} className='text-white bg-[#00396B] p-1 rounded'>Save</button>
         </form>
     </section>
   )

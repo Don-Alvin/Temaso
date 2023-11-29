@@ -10,7 +10,7 @@ const Projects = () => {
       <MetaData title={"Your projects"} />
       <header className='flex items-center justify-between w-full border-b p-4 shadow'>
         <h4 className='text-xl font-medium'>Manage all your projects</h4>
-        <Link to="addproject" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
+        <Link to="addproject" className='flex items-center gap-2 bg-[#00396B] text-white p-2 rounded'>
           <IoMdAdd />
           <span>Add a new project</span>
         </Link>

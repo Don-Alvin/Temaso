@@ -34,7 +34,7 @@ const Tasks = () => {
     <div key={item.uid}>
       <header className='flex items-center justify-between w-full border-b p-4'>
         <h4 className='text-xl font-semibold'>{item.name}</h4>
-        <Link to="addtask" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
+        <Link to="addtask" className='flex items-center gap-2 bg-[#00396B] text-white p-2 rounded'>
           <IoMdAdd />
           <span>Assign a new task</span>
         </Link>

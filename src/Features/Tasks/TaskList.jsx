@@ -40,7 +40,7 @@ const TaskList = ({tasks, deleteTask}) => {
       ) : (
         <div className='flex flex-col w-[50%] items-center gap-8'>
           <p className='text-xl font-medium'>You have not assigned any tasks yet</p>
-          <Link to="addtask" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
+          <Link to="addtask" className='flex items-center gap-2 bg-[#00396B] text-white p-2 rounded'>
             <IoMdAdd />
             <span>Assign a new task</span>
           </Link>

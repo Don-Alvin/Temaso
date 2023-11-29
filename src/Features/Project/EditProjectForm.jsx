@@ -36,7 +36,7 @@ const AddProjectForm = () => {
             placeholder="Duration"
             value={duration}
           />
-          <button className='bg-teal-700 text-white rounded p-2'>Add</button>
+          <button className='bg-[#00396B] text-white rounded p-2'>Add</button>
         </form>
       </article>
     </section>

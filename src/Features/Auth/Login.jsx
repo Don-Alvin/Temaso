@@ -69,7 +69,7 @@ const Login = () => {
           onClick={registerWithGoogle}
         >
           <FcGoogle className="w-6"/>
-          <p className="text-white bg-teal-700 p-1 font-semibold rounded-r">Sign in with google</p>
+          <p className="text-white bg-[#00396B] p-1 font-semibold rounded-r">Sign in with google</p>
         </button>
         <span className="text-gray-700 font-semibold">OR</span>
         <form className='py-1' onSubmit={handleSubmit}>
@@ -102,7 +102,7 @@ const Login = () => {
               {passwordVisible && <AiOutlineEyeInvisible  className={`absolute ${errors.password && touched.password && `top-[20%]`} top-[33%] right-3`} onClick={handlePassword}/>}
               {!passwordVisible && <AiOutlineEye  className={`absolute ${errors.password && touched.password && `top-[20%]`} top-[33%] right-3`} onClick={handlePassword}/>}
             </div>
-            <button type='submit' disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold'>Log in</button>
+            <button type='submit' disabled={isSubmitting} className='bg-[#00396B] rounded-lg p-3 text-white font-semibold'>Log in</button>
           </div>
         </form>
         <div className='py-4'>

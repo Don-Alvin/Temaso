@@ -105,7 +105,7 @@ const AddTaskForm = () => {
             id="assignedUser"
           />
           {errors.assignedUser && touched.assignedUser && <p className='text-red-700'>{errors.assignedUser}</p>}
-          <button type='submit' disabled={isSubmitting} className='bg-teal-700 text-white rounded p-2'>Add</button>
+          <button type='submit' disabled={isSubmitting} className='bg-[#00396B] text-white rounded p-2'>Add</button>
         </form>
       </article>
     </section>

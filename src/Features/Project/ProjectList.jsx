@@ -36,7 +36,7 @@ const ProjectList = () => {
               <div className='h-[1px] w-full bg-gray-700'></div>
               <div className='flex'>
                 <Link to={`/dashboard/${project.uid}`} className='p-2 font-semibold flex items-center gap-2 '>
-                  <button className='border p-1 rounded text-white bg-teal-700'>Open</button>
+                  <button className='border p-1 rounded text-white bg-[#00396B]'>Open</button>
                 </Link>
                 {/* <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
                   <button className='border p-1 rounded text-white bg-orange-700'>Edit</button>
@@ -59,7 +59,7 @@ const ProjectList = () => {
         ) : (
           <div className='flex flex-col w-[50%] items-center gap-8'>
             <p className='text-xl font-medium'>You have not added any projects yet</p>
-            <Link to="addproject" className='flex items-center gap-2 bg-teal-700 text-white p-2 rounded'>
+            <Link to="addproject" className='flex items-center gap-2 bg-[#00396B] text-white p-2 rounded'>
               <IoMdAdd />
               <span>Add a new project</span>
             </Link>

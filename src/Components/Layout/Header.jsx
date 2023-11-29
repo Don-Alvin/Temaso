@@ -74,23 +74,23 @@ const Header = () => {
 
             <div>
                 <ul className='flex gap-8 text-white font-semibold'>
-                    <li className='hover:bg-gray-50 hover:opacity-10 p-2 rounded'>
+                    <li className='hover:bg-gray-50 hover:bg-opacity-10 p-2 rounded'>
                         <Link>Home</Link>
                     </li>
-                    <li className='hover:bg-gray-50 hover:opacity-10 p-2 rounded'>
+                    <li className='hover:bg-gray-50 hover:bg-opacity-10 p-2 rounded'>
                         <Link>Blog</Link>
                     </li>
-                    <li className='hover:bg-gray-50 hover:opacity-10 p-2 rounded'>
+                    <li className='hover:bg-gray-50 hover:bg-opacity-10 p-2 rounded'>
                         <Link>Support</Link>
                     </li>
-                    <li className='hover:bg-gray-50 hover:opacity-10 p-2 rounded'>
+                    <li className='hover:bg-gray-50 hover:bg-opacity-10 p-2 rounded'>
                         <Link>Features</Link>
                     </li>
                 </ul>
             </div>
 
             <div className="flex items-center gap-4">
-                {user && <Link to="dashboard" className='text-white border rounded p-1 bg-teal-700'>Dashboard</Link>}
+                {user && <Link to="dashboard" className='text-white border rounded p-1 bg-[#00396B]'>Dashboard</Link>}
                 <div 
                     className='flex items-center gap-2 border p-1 rounded cursor-pointer'
                     onClick={handleAuthMenu}

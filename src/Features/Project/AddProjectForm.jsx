@@ -91,7 +91,7 @@ const AddProjectForm = () => {
             id="duration"
           />
           {errors.duration && touched.duration && <p className='text-red-700'>{errors.duration}</p>}
-          <button type='submit' disabled={isSubmitting} className='bg-teal-700 text-white rounded p-2'>Add</button>
+          <button type='submit' disabled={isSubmitting} className='bg-[#00396B] text-white rounded p-2'>Add</button>
         </form>
       </article>
     </section>
