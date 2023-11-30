@@ -27,7 +27,7 @@ const SidePanel = () => {
         }
     }
   return (
-    <section className='bg-gray-100 h-[90vh] w-[30%] py-4 mr-4 px-2 flex flex-col gap-6 border shadow rounded-lg'>
+    <section className='bg-gray-100 h-[95vh] w-[20%] py-4 mr-2 px-1 flex flex-col gap-6 border shadow rounded-lg'>
         <header>
             <div 
               className='flex items-center gap-2 p-1 rounded-lg cursor-pointer'
@@ -45,10 +45,10 @@ const SidePanel = () => {
         </header>
         <div className='w-full flex flex-col gap-8'>
             <NavLink 
-                className="flex items-center gap-2 font-semibold text-xl p-2 hover:bg-[#00396B] w-[100%] hover:text-white focus:bg-[#00396B] focus:text-white" 
+                className="flex items-center gap-2 font-semibold text-lg hover:bg-[#00396B] w-[100%] hover:text-white focus:bg-[#00396B] focus:text-white" 
                 to='/dashboard'
             >
-                <AiOutlineFileProtect className="w-8 h-8 text-gray-700 hover:text-white" />
+                <AiOutlineFileProtect className="w-6 h-8 text-gray-700 hover:text-white" />
                 <span className='text-gray-700 hover:text-white'>Projects</span>
             </NavLink>
             {/* <NavLink 
@@ -59,16 +59,16 @@ const SidePanel = () => {
                 Teams
             </NavLink> */}
             <NavLink 
-                className="flex items-center gap-2 text-gray-700 font-semibold text-xl p-2 hover:bg-[#00396B] w-[100%] hover:text-white focus:bg-[#00396B] focus:text-white" 
+                className="flex items-center gap-2 text-gray-700 font-semibold text-lg hover:bg-[#00396B] w-[100%] hover:text-white focus:bg-[#00396B] focus:text-white" 
                 to='settings'
             >
-                <MdOutlineManageAccounts className="w-8 h-8 text-gray-700 hover:text-white" />
+                <MdOutlineManageAccounts className="w-6 h-8 text-gray-700 hover:text-white" />
                 Profile settings
             </NavLink>
         </div>
-        <div className='p-2 flex items-center gap-2'>
-            <AiOutlineLogout onClick={logOut} className='w-8 h-8 text-gray-700 hover:text-white cursor-pointer' />
-            <span className='text-gray-700 font-semibold text-xl'>Log out</span>
+        <div className='flex items-center gap-2 cursor-pointer' onClick={logOut}>
+            <AiOutlineLogout className='w-6 h-8 text-gray-700 hover:text-white cursor-pointer' />
+            <span className='text-gray-700 font-semibold text-lg'>Log out</span>
         </div>
         
         
