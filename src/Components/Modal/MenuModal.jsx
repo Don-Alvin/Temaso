@@ -13,12 +13,12 @@ const MenuModal = ({handleAuthMenu, handleLogout}) => {
         >
         </div>
         <div 
-            className='hidden md:block w-[200px]  bg-white border rounded-lg border-gray-300 shadow-lg fixed top-24 right-10 z-50'
+            className='hidden md:block w-[200px] text-gray-700 font-semibold bg-white border rounded-lg border-gray-300 shadow-lg fixed top-24 right-10 z-50'
             >
             {user ? (
                 <ul className='flex flex-col w-full my-6 px-4'>
                     <Link 
-                        className='hover:bg-[#00396B] hover:text-white w-full text-center cursor-pointer p-2 rounded-lg'
+                        className='hover:bg-[#00396B]  hover:text-white w-full text-center cursor-pointer p-2 rounded-lg'
                         onClick={handleLogout}
                     >
                         Log out
@@ -28,14 +28,14 @@ const MenuModal = ({handleAuthMenu, handleLogout}) => {
                 <ul className='flex flex-col gap-2 w-full my-6 px-4'>
                     <Link 
                         to='/login' 
-                        className='w-full text-center cursor-pointer hover:bg-[#00396B] hover:text-white p-2 rounded-lg'
+                        className='text-gray-700 font-semibold w-full text-center cursor-pointer hover:bg-[#00396B] hover:text-white p-2 rounded-lg'
                         onClick={handleAuthMenu}
                     >
                         Log in
                     </Link>
                     <Link 
                         to='/register' 
-                        className='w-full text-center cursor-pointer hover:bg-[#00396B] hover:text-white p-2 rounded-lg'
+                        className='text-gray-700 font-semibold w-full text-center cursor-pointer hover:bg-[#00396B] hover:text-white p-2 rounded-lg'
                         onClick={handleAuthMenu}
                     >
                         Register

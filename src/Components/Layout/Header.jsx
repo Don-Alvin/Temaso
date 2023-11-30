@@ -57,14 +57,14 @@ const Header = () => {
       };
 
   return (
-    <header className='p-4 px-4 md:px-8 lg:px-16 flex fixed top-0 left-0 w-full z-20'>
+    <header className='p-4 px-4 md:px-8 lg:px-16 flex fixed top-0 left-0 w-full z-40 bg-[#00396B] bg-opacity-60'>
         <nav className='flex items-center justify-between w-full'>
             <div className='flex md:gap-3 lg:gap-10'>
                 <div className="">
                     <Link to='/' className='flex items-center gap-4'>
                         <img
                             className='h-[35px] md:h-[40px]'
-                            src='/images/logo.png'
+                            src='/images/logofooter.png'
                             alt='logo'
                         />
                         <span className='text-white font-bold text-xl'>Temaso</span>
@@ -74,9 +74,6 @@ const Header = () => {
 
             <div>
                 <ul className='flex gap-8 text-white font-semibold'>
-                    <li className='hover:bg-gray-50 hover:bg-opacity-10 p-2 rounded'>
-                        <Link>Home</Link>
-                    </li>
                     <li className='hover:bg-gray-50 hover:bg-opacity-10 p-2 rounded'>
                         <Link>Blog</Link>
                     </li>
@@ -104,7 +101,7 @@ const Header = () => {
                             )
                     }
 
-                    {user && <p className='text-gray-700 font-semibold'>Hey, {user.displayName}</p>}
+                    {user && <p className='text-white font-semibold'>Hey, {user.displayName}</p>}
 
                 </div>
             </div>
