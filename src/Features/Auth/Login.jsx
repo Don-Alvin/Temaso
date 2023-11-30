@@ -4,7 +4,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { FcGoogle } from "react-icons/fc"
 import { toast } from "react-toastify"
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth"
-import { doc, updateDoc } from "firebase/firestore"
+import { doc, setDoc, updateDoc } from "firebase/firestore"
 import { useFormik } from "formik"
 import MetaData from "../../Components/Meta/MetaData"
 import { auth, db } from "../../apis/firebase"
@@ -31,13 +31,21 @@ const Login = () => {
       toast.success("Login successful");
       navigate("/dashboard");
     } catch (error) {
-      toast.error(error);
+      toast.error('Check password or email');
     }
   }
 
   const registerWithGoogle = async() => {
     try {
-      await signInWithPopup(auth, provider)
+      const res = await signInWithPopup(auth, provider)
+      const user = res.user
+      await setDoc(doc(db, "users", user.uid), {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        online: true,
+        photoUrl: user.photoURL
+      });
       toast.success('Login successfull')
       navigate('/dashboard')
     } catch (error) {
@@ -57,7 +65,7 @@ const Login = () => {
   )
 
   return (
-    <section className='w-full h-screen  flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
+    <section className='w-full h-screen  flex items-center justify-center bg-[url("/images/hero2Bg.jpg")] bg-cover bg-center bg-no-repeat'>
       <MetaData title={'Sign into your account'} />
       <div className="flex justify-start flex-col items-center border p-6  border-teal-700 rounded-lg shadow-teal-700 shadow-md bg-white opacity-90 w-[90%] md:w-auto gap-2">
         <div className="title flex flex-col items-center ">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import Card from '../../ui/Card'
 import { IoMdAdd } from 'react-icons/io'
+import InputField from '../../ui/InputField'
 
 const TaskList = ({tasks, deleteTask}) => {
 
@@ -13,8 +14,16 @@ const TaskList = ({tasks, deleteTask}) => {
                   <div className='h-[1px] w-full bg-gray-700'></div>
                   <p className='text-sm p-2'>{task.description}</p>
                   <div className='h-[1px] w-full bg-gray-700'></div>
+                  <span className='text-sm p-2'>Assigned to: {task.assignedUser}</span>
+                  <div className='h-[1px] w-full bg-gray-700'></div>
                   <span className='text-sm p-2'>Deadline: {task.deadline.toDate().toDateString()}</span>
                   <span className='text-sm p-2'>Status: {task.isCompleted ? Completed : "In progress"}</span>
+                  <div className='h-[1px] w-full bg-gray-700'></div>
+                  <div>
+                    <InputField
+                      type='radio'
+                    />
+                  </div>
                   <div className='h-[1px] w-full bg-gray-700'></div>
                   <div className='flex'>
                     <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>

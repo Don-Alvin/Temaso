@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Card from '../../ui/Card'
 import { Link } from 'react-router-dom'
 import { useProjects } from '../../hooks/useProjects'
@@ -32,20 +32,20 @@ const ProjectList = () => {
               <p className='text-sm p-2'>{project.description}</p>
               <div className='h-[1px] w-full bg-gray-700'></div>
               <span className='text-sm p-2'>Duration: {project.duration}</span>
-              <span className='text-sm p-2'>Status: {project.isCompleted ? Completed : "In progress"}</span>
+              <span className='text-sm p-2'>{project.status ? project.status : null }</span>
               <div className='h-[1px] w-full bg-gray-700'></div>
-              <div className='flex'>
-                <Link to={`/dashboard/${project.uid}`} className='p-2 font-semibold flex items-center gap-2 '>
-                  <button className='border p-1 rounded text-white bg-[#00396B]'>Open</button>
+              <div className='flex items-center gap-2 p-2'>
+                <Link to={`/dashboard/${project.uid}`} className='bg-[#00396B] flex items-center justify-center rounded w-16 h-8 p-2 font-semibold flex items-center gap-2 '>
+                  <button className='text-white'>Open</button>
                 </Link>
-                {/* <Link to="editproject" className='p-2 font-semibold flex items-center gap-2 '>
-                  <button className='border p-1 rounded text-white bg-orange-700'>Edit</button>
-                </Link> */}
+                <Link to={`/dashboard/${project.uid}/edit`} className='flex items-center justify-center rounded w-16 h-8 bg-orange-700 font-semibold flex items-center gap-2 '>
+                  <button className='text-white '>Edit</button>
+                </Link>
                 <Link 
-                  className='p-2 font-semibold flex items-center gap-2'
+                  className='bg-red-700 flex items-center justify-center rounded w-16 h-8 p-2 font-semibold flex items-center gap-2'
                   onClick={() => deleteProject(project.name)}
                 >
-                  <p className='border p-1 rounded text-white bg-red-700'>Delete</p>
+                  <p className='text-white'>Delete</p>
                 </Link>
               </div>
             </Card>

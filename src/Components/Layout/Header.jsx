@@ -23,21 +23,21 @@ const Header = () => {
         setIsAuthMenuOpen(!isAuthMenuOpen)
     }
 
-    const handleMobileMenu = () => {
-        setIsMobileMenuOpen(true)
-    }
+    // const handleMobileMenu = () => {
+    //     setIsMobileMenuOpen(true)
+    // }
 
-    const closeMobileMenu = () => {
-        setIsMobileMenuOpen(false)
-    }
+    // const closeMobileMenu = () => {
+    //     setIsMobileMenuOpen(false)
+    // }
 
-    const openMobileSearch = () => {
-        setIsSearchOpen(true)
-    }
+    // const openMobileSearch = () => {
+    //     setIsSearchOpen(true)
+    // }
 
-    const closeMobileSearch = () => {
-        setIsSearchOpen(false)
-    }
+    // const closeMobileSearch = () => {
+    //     setIsSearchOpen(false)
+    // }
 
     const handleLogout = async () => {
         handleAuthMenu()
@@ -57,7 +57,7 @@ const Header = () => {
       };
 
   return (
-    <header className='p-4 px-4 md:px-8 lg:px-16 flex fixed top-0 left-0 w-full z-20 opacity-90'>
+    <header className='p-4 px-4 md:px-8 lg:px-16 flex fixed top-0 left-0 w-full z-20'>
         <nav className='flex items-center justify-between w-full'>
             <div className='flex md:gap-3 lg:gap-10'>
                 <div className="">

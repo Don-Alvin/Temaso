@@ -47,7 +47,7 @@ const Tasks = () => {
 
   return (
     <section className='text-gray-700 w-full'>
-      <MetaData title={"Sherehe Connect"} />
+      <MetaData title={'Tasks'} />
       {renderedProject}
     </section>
   )

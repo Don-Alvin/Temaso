@@ -9,7 +9,7 @@ import Join from '../Components/LandingPage/Join'
 
 const LandingPage = () => {
   return (
-    <div className='bg-white'>
+    <div className=''>
       <MetaData title={'Manage all your projects'} />
       <Hero />
       <Features />
