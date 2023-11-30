@@ -68,9 +68,9 @@ const Register = () => {
   )
 
   return (
-    <section className='w-full flex items-center justify-center bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
+    <section className='w-full flex items-center justify-center bg-[url("/images/hero2Bg.jpg")] bg-cover bg-center bg-no-repeat'>
       <MetaData title={'Register an account'} />
-      <div className="flex justify-center flex-col items-center border p-6 h-[auto] my-20 gap-2  border-teal-700 rounded-lg shadow-teal-700 shadow-md bg-white opacity-90 w-[90%] md:w-auto">
+      <div className="flex justify-center flex-col items-center border p-6 h-[auto] my-20 gap-2 rounded-lg  shadow-md bg-white opacity-90 w-[90%] md:w-auto">
         <div className="title flex flex-col items-center">
           <h4 className="text-xl text-gray-700 text-center">Explore more by joining us</h4>
         </div>
@@ -85,7 +85,7 @@ const Register = () => {
           <p className="text-white p-2 font-semibold rounded-r">Sign in with google</p>
         </button>
         <span className="text-gray-700 font-semibold">OR</span>
-        <form className='w-[90%]' onSubmit={handleSubmit}>
+        <form className='w-full' onSubmit={handleSubmit}>
               <div className='flex flex-col gap-4 p-4'>
                 <div className="flex-col flex md:flex-row gap-4">
                   <div className='flex flex-col gap-2 w-[100%]'>
@@ -135,7 +135,7 @@ const Register = () => {
           </div>
         </form>
         <div>
-          <span className='text-gray-700'>Already registered? <Link to='/login' className='text-teal-700'>Log in</Link></span>
+          <span className='text-gray-700'>Already registered? <Link to='/login' className='text-[#00396B] font-semibold'>Log in</Link></span>
         </div>
         
       </div>
