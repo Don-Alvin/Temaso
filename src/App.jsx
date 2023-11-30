@@ -17,6 +17,7 @@ import Tasks from "./Features/Tasks/Tasks"
 import AddProjectForm from "./Features/Project/AddProjectForm"
 import AddTaskForm from "./Features/Tasks/AddTaskForm"
 import RequireAuth from "./helper/RequireAuth"
+import EditProjectForm from "./Features/Project/EditProjectForm"
 
 
 const router = createBrowserRouter(
@@ -26,17 +27,18 @@ const router = createBrowserRouter(
         <Route index element={<LandingPage />} />
         <Route path='login' element={<Login />} />
         <Route path="register" element={<Register />} />
-        <Route element={<RequireAuth />}>
+        <Route path="*" element={<ErrorPage />}/>
+      </Route>
+      <Route element={<RequireAuth />}>
           <Route path="/dashboard" element={<DashboardLayout />}>
             <Route index element={<Projects />} />
             <Route path=":projectId" element={<Tasks />}/>
             <Route path="settings" element={<Settings />} />
             <Route path="addproject" element={<AddProjectForm />} />
             <Route path=":projectId/addtask" element={<AddTaskForm />} />
+            <Route path=":projectId/edit" element={<EditProjectForm />} />
           </Route>
         </Route>
-        <Route path="*" element={<ErrorPage />}/>
-      </Route>
     </Route>
   )
 )

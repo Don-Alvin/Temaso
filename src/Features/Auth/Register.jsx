@@ -83,7 +83,7 @@ const Register = () => {
           onClick={registerWithGoogle}
         >
           <FcGoogle className="w-6"/>
-          <p className="text-white bg-teal-700 p-1 font-semibold rounded-r">Register with google</p>
+          <p className="text-white bg-[#00396B] p-1 font-semibold rounded-r">Register with google</p>
         </button>
         <span className="text-gray-700 font-semibold">OR</span>
         <form className='w-[90%]' onSubmit={handleSubmit}>
@@ -132,7 +132,7 @@ const Register = () => {
                     {!passwordVisible && <AiOutlineEye  className={`absolute ${errors.password && touched.password && `top-[42%]`} top-[62%] right-3`} onClick={handlePassword}/>}
                     {errors.password && touched.password && <p className='text-red-700'>{errors.password}</p>}
                   </div>
-              <button type="submit" disabled={isSubmitting} className='bg-teal-700 rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
+              <button type="submit" disabled={isSubmitting} className='bg-[#00396B] rounded-lg p-3 text-white font-semibold w-[100%]'>Register</button>
           </div>
         </form>
         <div>

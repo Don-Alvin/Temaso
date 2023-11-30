@@ -1,16 +1,22 @@
 import React from 'react'
 import MetaData from '../Components/Meta/MetaData'
 import { Link } from 'react-router-dom'
+import Hero from '../Components/LandingPage/Hero'
+import Features from '../Components/LandingPage/Features'
+import Testimonials from '../Components/LandingPage/Testimonials'
+import FAQ from '../Components/LandingPage/FAQ'
+import Join from '../Components/LandingPage/Join'
 
 const LandingPage = () => {
   return (
-    <section className=' flex justify-center items-center relative h-screen bg-[url("/images/authBg.jpg")] bg-cover bg-center bg-no-repeat'>
+    <div className=''>
       <MetaData title={'Manage all your projects'} />
-      <div className='absolute inset-0 bg-black opacity-70 z-10'></div>
-      <div className="relative z-20 w-[90%]">
-        <p className='text-white font-bold text-center text-3xl'>Manage all your projects with Temaso</p>
-      </div>
-    </section>
+      <Hero />
+      <Features />
+      <Testimonials />
+      <FAQ />
+      <Join />
+    </div>
   )
 }
 

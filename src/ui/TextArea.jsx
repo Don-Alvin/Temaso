@@ -2,7 +2,7 @@ import classNames from "classnames"
 
 const TextArea = ({id, cols, name, rows, placeholder, value, onChange, ...rest}) => {
 
-  const classes = classNames('border rounded shadow p-4', rest.className)
+  const classes = classNames('border rounded shadow p-4 bg-white placeholder:text-gray-700', rest.className)
 
   return (
     <textarea

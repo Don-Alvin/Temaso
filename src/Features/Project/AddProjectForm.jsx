@@ -10,6 +10,7 @@ import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
 import { db } from '../../apis/firebase'
 import { addProjectSchema } from './Schemas'
+import Select from 'react-select'
 
 const AddProjectForm = () => {
 
@@ -28,9 +29,8 @@ const AddProjectForm = () => {
         name:values.name,
         description: values.description,
         duration: values.duration,
+        status: values.status,
         createdBy,
-        inProgress: true,
-        isCompleted: false
       })
       toast.success("New project added")
       navigate('/dashboard')
@@ -44,7 +44,8 @@ const AddProjectForm = () => {
     initialValues: {
       name: "",
       description: "",
-      duration: ""
+      duration: "",
+      status: ""
     },
     validationSchema: addProjectSchema,
     onSubmit
@@ -56,7 +57,7 @@ const AddProjectForm = () => {
     <section className='w-full'>
       <MetaData title={"Add a new project"} />
       <header className='shadow w-full'>
-        <h4 className='p-6 text-gray-700 text-lg font-medium'>Add a new project</h4>
+        <h4 className='p-6 text-gray-700 text-lg font-semibold'>Add a new project</h4>
       </header>
       <article className='w-[70%] mx-auto'>
         <form className='p-6 text-gray-700 grid gap-4' onSubmit={handleSubmit}>
@@ -91,7 +92,7 @@ const AddProjectForm = () => {
             id="duration"
           />
           {errors.duration && touched.duration && <p className='text-red-700'>{errors.duration}</p>}
-          <button type='submit' disabled={isSubmitting} className='bg-teal-700 text-white rounded p-2'>Add</button>
+          <button type='submit' disabled={isSubmitting} className='bg-[#00396B] text-white rounded p-2'>Add</button>
         </form>
       </article>
     </section>

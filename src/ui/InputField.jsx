@@ -2,7 +2,7 @@ import classNames from 'classnames'
 
 const InputField = ({value, label, placeholder, onChange, id, type, accept, ...rest}) => {
 
-  const classes  = classNames('border rounded shadow p-2', rest.className)
+  const classes  = classNames('border rounded shadow p-2 bg-white placeholder:text-gray-700', rest.className)
 
   return (
     <div className='flex flex-col'>

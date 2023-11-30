@@ -4,7 +4,7 @@ import Select from 'react-select'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 import { db, storage } from '../../apis/firebase'
 import useAuth from '../../hooks/useAuth'
-import { Timestamp, doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc } from 'firebase/firestore'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { updateProfile } from 'firebase/auth'
@@ -89,7 +89,7 @@ const SettingsForm = () => {
                     isSearchable
                 />
             </label>
-        <button onClick={handleChange} className='text-white bg-teal-700 p-1 rounded'>Save</button>
+        <button onClick={handleChange} className='text-white bg-[#00396B] p-1 rounded'>Save</button>
         </form>
     </section>
   )
