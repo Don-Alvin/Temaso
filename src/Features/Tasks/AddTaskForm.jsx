@@ -36,10 +36,6 @@ const AddTaskForm = () => {
       })
       toast.success("New task assigned")
       navigate(`/dashboard/${projectId}`)
-      setName('')
-      setDeadline("")
-      setDescription("")
-      setAssignedUser("")
     } catch (error) {
       toast.error(error.message)
     }
@@ -87,6 +83,7 @@ const AddTaskForm = () => {
           />
           {errors.description && touched.description && <p className='text-red-700'>{errors.description}</p>}
           <InputField
+            label={'Deadline'}
             type="date"
             className={errors.date && touched.date ? `outline outline-1 outline-red-700` : `outline-teal-700`}
             value={values.deadline}
