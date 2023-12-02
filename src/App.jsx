@@ -18,6 +18,7 @@ import AddProjectForm from "./Features/Project/AddProjectForm"
 import AddTaskForm from "./Features/Tasks/AddTaskForm"
 import RequireAuth from "./helper/RequireAuth"
 import EditProjectForm from "./Features/Project/EditProjectForm"
+import EditTaskForm from "./Features/Tasks/EditTaskForm"
 
 
 const router = createBrowserRouter(
@@ -37,19 +38,14 @@ const router = createBrowserRouter(
             <Route path="addproject" element={<AddProjectForm />} />
             <Route path=":projectId/addtask" element={<AddTaskForm />} />
             <Route path=":projectId/edit" element={<EditProjectForm />} />
+            {/* <Route path=':projectId/:taskName/edit' element={<EditTaskForm />} /> */}
           </Route>
         </Route>
     </Route>
   )
 )
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      staleTime: 0
-    }
-  }
-})
+const queryClient = new QueryClient()
 
 const App = () => {
   return (

@@ -11,18 +11,19 @@ const TaskList = ({tasks, deleteTask}) => {
               <div key={task.name}>
                 <Card>
                   <h4 className='font-semibold p-2'>{task.name}</h4>
-                  <div className='h-[1px] w-full bg-gray-700'></div>
-                  <p className='text-sm p-2'>{task.description}</p>
-                  <div className='h-[1px] w-full bg-gray-700'></div>
+                  <hr />
+                  <p className='text-sm p-2 h-fit'>{task.description}</p>
+                  <hr />
                   <span className='text-sm p-2'>Assigned to: {task.assignedUser}</span>
-                  <div className='h-[1px] w-full bg-gray-700'></div>
+                  <hr />
                   <span className='text-sm p-2'>Deadline: {task.deadline.toDate().toDateString()}</span>
+                  <hr />
                   <span className='text-sm p-2'>Status: {task.isCompleted ? Completed : "In progress"}</span>
-                  <div className='h-[1px] w-full bg-gray-700'></div>
+                  <hr />
                   <div className='flex p-2 flex gap-2 items-center'>
-                    <Link to="editTask" className='bg-orange-700 w-16 h-8 p-2 rounded font-semibold flex justify-center items-center'>
+                    {/* <Link to={`${task.name}/edit`} className='bg-orange-700 w-16 h-8 p-2 rounded font-semibold flex justify-center items-center'>
                       <button className='text-white'>Edit</button>
-                    </Link>
+                    </Link> */}
                     <Link 
                       className='bg-red-700 w-16 h-8 p-2 rounded p-2 font-semibold flex items-center justify-center gap-2'
                       onClick = {() => deleteTask(task)}
