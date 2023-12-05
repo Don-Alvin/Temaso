@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import Card from '../../ui/Card'
 import { Link } from 'react-router-dom'
 import { useProjects } from '../../hooks/useProjects'

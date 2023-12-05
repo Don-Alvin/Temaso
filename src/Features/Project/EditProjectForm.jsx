@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import MetaData from '../../Components/Meta/MetaData'
 import InputField from '../../ui/InputField'
 import TextArea from '../../ui/TextArea'
@@ -13,7 +13,7 @@ import Select from 'react-select'
 const EditProjectForm = () => {
   const { projectId } = useParams()
 
-  const {isInitialLoading, error, isError, projects} = useProjects()
+  const { projects } = useProjects()
   const {user} = useAuth()
   const navigate = useNavigate()
 
@@ -34,8 +34,6 @@ const EditProjectForm = () => {
   const [description, setDescription] = useState(project.description)
   const [status, setStatus] = useState(project.status)
 
-  console.log(status, description, name, duration);
-
   const editProject = async (e) => {
     e.preventDefault()
     const docRef = doc(db, 'projects', project.name)
@@ -49,7 +47,6 @@ const EditProjectForm = () => {
       navigate('/dashboard')
     } catch (error) {
       throw new Error("Editing failed")
-      console.log(error);
       toast.error(error.message)
     }
 

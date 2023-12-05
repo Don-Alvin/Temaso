@@ -1,4 +1,3 @@
-import React from 'react'
 import MetaData from '../../Components/Meta/MetaData'
 import SettingsForm from './SettingsForm'
 

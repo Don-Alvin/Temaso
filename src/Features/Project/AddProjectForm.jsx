@@ -10,7 +10,6 @@ import TextArea from '../../ui/TextArea'
 import useAuth from '../../hooks/useAuth'
 import { db } from '../../apis/firebase'
 import { addProjectSchema } from './Schemas'
-import Select from 'react-select'
 
 const AddProjectForm = () => {
 
@@ -36,7 +35,6 @@ const AddProjectForm = () => {
       navigate('/dashboard')
     } catch (error) {
       toast.error(error.message)
-      console.log(error.message);
     }
   }
 

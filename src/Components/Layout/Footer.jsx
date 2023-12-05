@@ -1,5 +1,4 @@
-import React from 'react'
-import { AiFillFacebook, AiFillGithub, AiFillInstagram, AiFillLinkedin, AiFillTwitterSquare } from 'react-icons/ai'
+import { AiFillGithub, AiFillLinkedin, AiFillTwitterSquare } from 'react-icons/ai'
 
 const Footer = () => {
     const date = new Date().getFullYear()
