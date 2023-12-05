@@ -11,7 +11,7 @@ const Features = () => {
         <span>Everything you need to manage your projects</span>
       </div>
       <div className="flex flex-wrap gap-6 justify-center">
-        <Link className="border border-solid border-gray-300 rounded-lg shadow flex flex-col gap-4 p-4 bg-transparent hover:bg-white">
+        <Link className="border border-solid border-gray-300 rounded-lg shadow flex flex-col gap-4 p-4 bg-gray-100 hover:bg-white">
           <IoCreate className="text-blue-500 text-3xl" />
           <h6 className="font-semibold">Project Creation</h6>
           <p>Create and manage your projects with ease</p>
@@ -20,7 +20,7 @@ const Features = () => {
             <MdOutlineArrowRightAlt />
           </Link>
         </Link>
-        <Link className="border border-solid border-gray-300 rounded-lg shadow flex flex-col gap-4 p-4 bg-transparent hover:bg-white">
+        <Link className="border border-solid border-gray-300 rounded-lg shadow flex flex-col gap-4 p-4 bg-gray-100 hover:bg-white">
           <MdAssignmentAdd className="text-blue-500 text-3xl" />
           <h6 className="font-semibold">Task Assignment</h6>
           <p>Assign tasks to your team members effortlessly</p>
@@ -29,7 +29,7 @@ const Features = () => {
             <MdOutlineArrowRightAlt />
           </Link>
         </Link>
-        <Link className="border border-solid border-gray-300 rounded-lg shadow flex flex-col gap-4 p-4 bg-transparent hover:bg-white">
+        <Link className="border border-solid border-gray-300 rounded-lg shadow flex flex-col gap-4 p-4 bg-gray-100 hover:bg-white">
           <RiTeamFill className="text-blue-500 text-3xl" />
           <h6 className="font-semibold">Team Building</h6>
           <p>Build your team and collaborate effetively</p>
