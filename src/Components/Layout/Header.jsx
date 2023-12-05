@@ -57,7 +57,7 @@ const Header = () => {
       };
 
   return (
-    <header className='p-4 px-4 md:px-8 lg:px-16 flex fixed top-0 left-0 w-full z-40 bg-[#00396B] bg-opacity-60'>
+    <header className='p-4 px-4 md:px-8 lg:px-16 flex fixed top-0 left-0 w-full z-40 bg-[#00396B] bg-opacity-80'>
         <nav className='flex items-center justify-between w-full'>
             <div className='flex md:gap-3 lg:gap-10'>
                 <div className="">
