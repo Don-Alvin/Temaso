@@ -4,7 +4,7 @@ import { AiFillFacebook, AiFillGithub, AiFillInstagram, AiFillLinkedin, AiFillTw
 const Footer = () => {
     const date = new Date().getFullYear()
   return (
-    <footer className='bg-stone-800 py-10 px-10 flex flex-col items-center lg:items-center gap-4 text-white'>
+    <footer className='bg-[#00396B] py-10 px-10 flex flex-col items-center lg:items-center gap-4 text-white'>
         <div className='flex w-full justify-between py-8'>
             <div className='flex flex-col gap-2'>
                 <img className='w-5' src='/images/logofooter.png' alt='logo' />
