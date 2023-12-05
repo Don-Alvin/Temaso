@@ -1,4 +1,3 @@
-import React from 'react'
 import { TbMessageCircleQuestion } from "react-icons/tb"
 import { Link } from 'react-router-dom'
 

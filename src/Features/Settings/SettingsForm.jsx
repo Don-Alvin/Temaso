@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import InputField from '../../ui/InputField'
 import Select from 'react-select'
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'

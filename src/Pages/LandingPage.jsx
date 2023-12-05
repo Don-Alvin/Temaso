@@ -1,6 +1,4 @@
-import React from 'react'
 import MetaData from '../Components/Meta/MetaData'
-import { Link } from 'react-router-dom'
 import Hero from '../Components/LandingPage/Hero'
 import Features from '../Components/LandingPage/Features'
 import Testimonials from '../Components/LandingPage/Testimonials'

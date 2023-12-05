@@ -1,4 +1,3 @@
-import React from 'react'
 import MetaData from '../../Components/Meta/MetaData'
 import { Link, useParams } from 'react-router-dom'
 import { IoMdAdd } from 'react-icons/io'
@@ -25,7 +24,6 @@ const Tasks = () => {
       })
     } catch (error) {
       console.error(error)
-      console.log(error.message);
       throw new Error("Could not delete task")
     }
   }

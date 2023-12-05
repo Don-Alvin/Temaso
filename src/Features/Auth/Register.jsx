@@ -1,6 +1,4 @@
-import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"
 import { FcGoogle } from 'react-icons/fc'
 import { toast } from "react-toastify"
 import { doc, setDoc } from "firebase/firestore"; 
@@ -12,8 +10,6 @@ import { registerSchema } from "./Schemas";
 
 
 const Register = () => {
-
-  const [passwordVisible, setPasswordVisible] = useState(false)
 
   const navigate = useNavigate()
   const provider = new GoogleAuthProvider()
@@ -121,7 +117,7 @@ const Register = () => {
                     <label className="text-gray-700 text-md">Password</label>
                     <input
                       className={`p-2 border rounded-lg bg-white placeholder:text-gray-700 ${errors.password && touched.password ? `outline outline-1 outline-red-700` : `outline-teal-700`}`}
-                      type={!passwordVisible ? 'password' : 'text'}
+                      type={'password'}
                       id="password"
                       onChange={handleChange}
                       onBlur={handleBlur}
