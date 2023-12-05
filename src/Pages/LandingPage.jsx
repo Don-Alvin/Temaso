@@ -13,7 +13,9 @@ const LandingPage = () => {
       <MetaData title={'Manage all your projects'} />
       <Hero />
       <Features />
+      <hr className='h-[2px]' />
       <Testimonials />
+      <hr className='h-[2px]' />
       <FAQ />
       <Join />
     </div>

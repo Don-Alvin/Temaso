@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Join = () => {
   return (
@@ -9,7 +10,7 @@ const Join = () => {
           <h5 className='text-3xl font-bold'>Ready to get started?</h5>
           <p className='font-semibold text-xl'>Join us today and take control of your projects</p>
         </div>
-        <button className='btn btn-outline'>Register Now</button>
+        <Link to='/register' className='btn btn-outline'>Register Now</Link>
       </div>
     </section>
   )

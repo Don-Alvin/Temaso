@@ -1,4 +1,4 @@
-import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Hero = () => {
   return (
@@ -8,7 +8,7 @@ const Hero = () => {
         <h4 className='text-white font-extrabold text-center text-5xl'>Welcome to Temaso</h4>
         <p className='font-bold text-2xl text-center'>Supercharge your project <br/> management skills!</p>
         <div className='flex flex-col items-center gap-4'>
-            <button className='btn btn-outline shadow'>Get started now</button>
+            <Link to='/register' className='btn btn-outline shadow'>Get started now</Link>
             <p className='font-semibold text-xl'>Start your free trial today!</p>
         </div>
       </div>
